@@ -1,7 +1,7 @@
 # Mixer
 
 
-[![Build Status](https://img.shields.io/travis/maael/drinkingvideogames/mixer.svg?style=flat-square)](https://travis-ci.org/maael/drinkingvideogames/mixer)
+[![Build Status](https://img.shields.io/travis/drinkingvideogames/mixer.svg?style=flat-square)](https://travis-ci.org/drinkingvideogames/mixer)
 [![Code Climate](https://img.shields.io/codeclimate/github/drinkingvideogames/mixer.svg?style=flat-square)](https://codeclimate.com/github/drinkingvideogames/mixer)
 
 ## Setup
