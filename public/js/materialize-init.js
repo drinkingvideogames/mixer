@@ -6,4 +6,6 @@ $(document).ready(function () {
       'League of Legends': '/imgs/icons/league.png'
     }
   })
+
+  $('.modal').modal()
 })

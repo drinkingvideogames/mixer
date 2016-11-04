@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Header from '../header.jsx'
+import AdminToolbar from '../admin.jsx'
 
 class MainTemplate extends Component {
   render () {
@@ -9,6 +10,7 @@ class MainTemplate extends Component {
         <div className='container'>
           {this.props.children}
         </div>
+        <AdminToolbar />
       </div>
     )
   }
