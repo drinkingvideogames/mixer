@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 class GameCard extends Component {
   render () {
@@ -12,13 +13,13 @@ class GameCard extends Component {
       }
     }
     return (
-      <div className='card small'>
+      <div className='card small hoverable'>
         <div className='card-image' style={styles.cardImage} />
         <div className='card-content'>
           <p>{this.props.name}</p>
         </div>
         <div className='card-action'>
-          <a href='#'>This is a link</a>
+          <Link to={`/game/${this.props.url}`}>More details!</Link>
         </div>
       </div>
     )
