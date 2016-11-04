@@ -4,6 +4,7 @@ const configuration = require('feathers-configuration')
 const hooks = require('feathers-hooks')
 const rest = require('feathers-rest')
 const socketio = require('feathers-socketio')
+const mongoose = require('mongoose')
 const compression = require('compression')
 const favicon = require('serve-favicon')
 const cors = require('cors')
@@ -14,6 +15,10 @@ const services = require('./api/services')
 const middleware = require('./api/middleware')
 
 dotenv.load()
+
+mongoose.Promise = global.Promise
+
+mongoose.connect(`${process.env.MONGO_DB_HOST}:${process.env.MONGO_DB_PORT}/${process.env.MONGO_DB_NAME}`)
 
 const app = feathers()
 
