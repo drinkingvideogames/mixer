@@ -12,14 +12,13 @@ class GameCard extends Component {
       }
     }
     return (
-      <div className="card small" style={{ width:'300px' }}>
-        <div className="card-image" style={styles.cardImage}>
-        </div>
-        <div className="card-content">
+      <div className='card small' style={{ width: '300px' }}>
+        <div className='card-image' style={styles.cardImage} />
+        <div className='card-content'>
           <p>{this.props.name}</p>
         </div>
-        <div className="card-action">
-          <a href="#">This is a link</a>
+        <div className='card-action'>
+          <a href='#'>This is a link</a>
         </div>
       </div>
     )

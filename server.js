@@ -41,7 +41,6 @@ app.use(compression())
   .configure(services)
   .configure(middleware)
 
-
 app.get('*', (req, res) => {
   return res.sendFile(path.join(app.get('public'), 'index.html'))
 })

@@ -1,4 +1,4 @@
-$(document).ready(function() { 
+$(document).ready(function () {
   $('input.autocomplete.games').autocomplete({
     data: {
       'Super Smash Bros Melee': '/imgs/icons/melee.png',
