@@ -1,16 +1,26 @@
 const path = require('path')
-const express = require('express')
+const feathers = require('feathers')
+const configuration = require('feathers-configuration')
+const hooks = require('feathers-hooks')
+const rest = require('feathers-rest')
+const socketio = require('feathers-socketio')
+const compression = require('compression')
+const favicon = require('serve-favicon')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const logger = require('morgan')
 const dotenv = require('dotenv')
+const services = require('./api/services')
+const middleware = require('./api/middleware')
 
 dotenv.load()
 
-const app = express()
+const app = feathers()
+
+app.configure(configuration(path.join(__dirname, '..')))
+
 let port = process.env.PORT || 4242
 let env = process.env.NODE_ENV || 'development'
-let publicPath = path.join(__dirname, 'public')
 
 if (env === 'development') {
   const webpackBundler = require('./lib/middleware/webpack-bundler-middleware')
@@ -18,14 +28,24 @@ if (env === 'development') {
   app.use(logger('dev'))
 }
 
-app.use(bodyParser.json())
-app.use(cors())
-app.use(express.static(publicPath))
+app.use(compression())
+  .options('*', cors())
+  .use(cors())
+  .use(favicon(path.join(app.get('public'), 'favicon.ico')))
+  .use('/', feathers.static(app.get('public')))
+  .use(bodyParser.json())
+  .use(bodyParser.urlencoded({ extended: true }))
+  .configure(hooks())
+  .configure(rest())
+  .configure(socketio())
+  .configure(services)
+  .configure(middleware)
+
 
 app.get('*', (req, res) => {
-  return res.sendFile(path.join(publicPath, 'index.html'))
+  return res.sendFile(path.join(app.get('public'), 'index.html'))
 })
 
 app.listen(port, () => {
-  console.log(`NODE_ENV ${env} on ${port}`)
+  console.log(`NODE_ENV ${app.get('host')} on ${port}`)
 })
