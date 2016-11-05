@@ -99,8 +99,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    genreAdd: (name) => { dispatch(actions.genreAdd(name)) },
-    gameAdd: (name, url, imageUrl) => { dispatch(actions.gameAdd(name, url, imageUrl)) }
+    syncGenreAdd: (name) => { dispatch(actions.genreAdd(name)) },
+    gameAdd: (name, url, imageUrl) => { dispatch(actions.gameAdd(name, url, imageUrl)) },
+    genreAdd: (name) => { dispatch({ type: 'genre/ADD', payload: { name } }) }
   }
 }
 
