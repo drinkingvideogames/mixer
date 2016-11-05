@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 class Header extends Component {
   render () {
@@ -7,6 +8,11 @@ class Header extends Component {
       genreBlock: { width: '15%', display: 'inline-block', textAlign: 'center', float: 'right' },
       genreButton: { height: '100%', width: '100%', display: 'block' }
     }
+
+    const genres = this.props.genres.length > 0 ? this.props.genres.map((genre, index) => {
+      return (<li key={index}><a href='#!'>{genre.name}</a></li>)
+    }) : (<li><a href='#!'>No genres to list!</a></li>)
+
     return (
       <nav>
         <div className='nav-wrapper blue'>
@@ -19,9 +25,7 @@ class Header extends Component {
             <div style={styles.genreBlock}>
               <a className='dropdown-button' href='#' data-activates='genresDropdown' style={styles.genreButton}>Genres</a>
               <ul id='genresDropdown' className='dropdown-content'>
-                <li><a href='#!'>FPS</a></li>
-                <li><a href='#!'>Fighter</a></li>
-                <li><a href='#!'>RTS</a></li>
+                {genres}
               </ul>
             </div>
           </form>
@@ -31,4 +35,8 @@ class Header extends Component {
   }
 }
 
-export default Header
+const mapStateToProps = (state) => {
+  return { genres: state.genres }
+}
+
+export default connect(mapStateToProps)(Header)

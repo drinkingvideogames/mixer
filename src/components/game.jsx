@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 class Game extends Component {
   render () {
-    const games = [
-      { imageUrl: '/imgs/icons/league.png', name: 'League of Legends 1', url: 'league' },
-      { imageUrl: '/imgs/icons/melee.png', name: 'Super Smash Bros Melee', url: 'melee' },
-      { imageUrl: '/imgs/icons/brawl.png', name: 'Super Smash Bros Brawl', url: 'brawl' },
-      { imageUrl: '/imgs/icons/league.png', name: 'League of Legends 2', url: 'league2' }
-    ]
-
-    const game = games.find((game) => game.url === this.props.routeParams.game)
+    const game = this.props.games.find((game) => game.url === this.props.routeParams.game)
 
     if (game) {
       return (
@@ -56,4 +50,8 @@ class Game extends Component {
   }
 }
 
-export default Game
+const mapStateToProps = (state) => {
+  return { games: state.games }
+}
+
+export default connect(mapStateToProps)(Game)
