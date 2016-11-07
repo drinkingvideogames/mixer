@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
 class DrinkingGame extends Component {
@@ -11,7 +12,9 @@ class DrinkingGame extends Component {
         <div>
           <nav>
             <div className='nav-wrapper blue'>
-              <a href='#' className='brand-logo center'>{game.name}</a>
+              <Link to={`/game/${game.url}`}>
+                <a href='#' className='brand-logo center'>{game.name}</a>
+              </Link>
             </div>
           </nav>
           <div className='row'>
