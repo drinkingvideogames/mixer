@@ -19,7 +19,7 @@ class Header extends Component {
 
       $('.autocomplete-content').remove()
       $('input.autocomplete.games').autocomplete({ data })
-    })    
+    })
   }
 
   render () {
