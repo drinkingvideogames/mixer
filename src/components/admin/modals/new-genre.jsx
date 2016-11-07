@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import actions from '../../../actions'
 
-class newGenreModal extends Component {
+class NewGenreModal extends Component {
   render () {
     let input = {}
     return (
       <div id='newGenreModal' className='modal modal-fixed-footer'>
         <div className='modal-content'>
-          <h4><i className='material-icons'>games</i> New Genre</h4>
+          <h4><i className='material-icons'>star</i> New Genre</h4>
           <p>Add details for a new genre</p>
           <div className='row'>
             <form className='col s12'>
@@ -48,4 +48,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(newGenreModal)
+export default connect(mapStateToProps, mapDispatchToProps)(NewGenreModal)

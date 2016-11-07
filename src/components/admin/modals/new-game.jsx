@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import actions from '../../../actions'
 
-class newGameModal extends Component {
+class NewGameModal extends Component {
   render () {
     let input = {}
     return (
@@ -55,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(newGameModal)
+export default connect(mapStateToProps, mapDispatchToProps)(NewGameModal)
