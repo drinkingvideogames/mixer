@@ -12,7 +12,14 @@ const gameAdd = (name, url, imageUrl) => ({
   imageUrl
 })
 
+const drinkingGameAdd = (game, name, url) => ({
+  type: constants.drinkingGame.ADD,
+  name,
+  url
+})
+
 export default {
   genreAdd,
-  gameAdd
+  gameAdd,
+  drinkingGameAdd
 }

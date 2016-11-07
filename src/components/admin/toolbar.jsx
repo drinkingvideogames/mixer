@@ -9,10 +9,13 @@ class AdminToolbar extends Component {
         </a>
         <ul>
           <li className='waves-effect waves-light'>
+            <a className='modal-trigger' href='#newGenreModal'><i className='material-icons'>star</i>New Genre</a>
+          </li>
+          <li className='waves-effect waves-light'>
             <a className='modal-trigger' href='#newGameModal'><i className='material-icons'>games</i>New Game</a>
           </li>
           <li className='waves-effect waves-light'>
-            <a className='modal-trigger' href='#newGenreModal'><i className='material-icons'>games</i>New Genre</a>
+            <a className='modal-trigger' href='#newDrinkingGameModal'><i className='material-icons'>local_bar</i>New Drinking Game</a>
           </li>
         </ul>
       </div>

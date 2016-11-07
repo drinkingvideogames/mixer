@@ -5,8 +5,7 @@ const drinkingGame = (state, action) => {
     case constants.drinkingGame.ADD:
       return {
         name: action.name,
-        url: action.url,
-        imageUrl: action.imageUrl
+        url: action.url
       }
     default:
       return state
