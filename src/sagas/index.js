@@ -1,17 +1,19 @@
 import { takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
 
-function* addGenre(action) {
-   try {
-      const user = yield call(function () { console.log('saga called', arguments) }, action.payload.name);
-      yield put({type: 'ADD_GENRE_SUCCEEDED', user: user});
-   } catch (e) {
-      yield put({type: 'ADD_GENRE_FAILED', message: e.message});
-   }
-}
+export default function makeSaga(app) {
 
-function* mySaga() {
-  yield* takeEvery('genre/ADD', addGenre);
-}
+  function* addGenre (action) {
+    try {
+      yield put({ type: 'genre/ADD/SUCCESS', name: action.payload.name })
+    } catch (e) {
+      yield put({ type: 'genre/ADD/FAILED', message: e.message })
+    }
+  }
 
-export default mySaga
+  function* mySaga () {
+    yield * takeEvery('GENRE_ADD', addGenre)
+  }
+  
+  return mySaga
+}

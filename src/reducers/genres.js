@@ -2,10 +2,8 @@ import constants from '../actions/constants'
 
 const genre = (state, action) => {
   switch (action.type) {
-    case constants.genre.ADD:
-      return {
-        name: action.name
-      }
+    case constants.genre.ADD.SUCCESS:
+      return Object.assign({}, { name: action.name })
     default:
       return state
   }
@@ -13,7 +11,7 @@ const genre = (state, action) => {
 
 const genres = (state = [], action) => {
   switch (action.type) {
-    case constants.genre.ADD:
+    case constants.genre.ADD.SUCCESS:
       return [
         ...state,
         genre(undefined, action)

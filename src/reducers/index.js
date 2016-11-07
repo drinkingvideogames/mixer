@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux'
 import genres from './genres'
 import games from './games'
+import drinkingGames from './drinking-games'
 
-const rootReducer = combineReducers({ genres, games })
+function createRootReducer () {
+  return combineReducers({ genres, games, drinkingGames }) 
+}
 
-export default rootReducer
+export default createRootReducer

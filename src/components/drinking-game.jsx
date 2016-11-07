@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import DrinkingGameCard from './drinking-game-card.jsx'
 
-class Game extends Component {
+class DrinkingGame extends Component {
   render () {
     const game = this.props.games.find((game) => game.url === this.props.routeParams.game)
+    const drinkingGame = this.props.drinkingGames.find((game) => game.url === this.props.routeParams.drinkingGame)
 
     if (game) {
       return (
@@ -18,14 +18,8 @@ class Game extends Component {
             <div className='col s12 m12'>
               <div className='card'>
                 <div className='card-content'>
-                  <span className='card-title'>Drinking Games</span>
-                  <div className='row'>
-                    {this.props.drinkingGames.map((drinkingGame, index) => {
-                      return (<div className='col s3 m3' key={index}>
-                        <DrinkingGameCard game={game} drinkingGame={drinkingGame} />
-                      </div>)
-                    })}
-                  </div>
+                  <span className='card-title'>{drinkingGame.name}</span>
+                  <p>Drink some things!</p>
                 </div>
               </div>
             </div>
@@ -42,4 +36,4 @@ const mapStateToProps = (state) => {
   return { games: state.games, drinkingGames: state.drinkingGames }
 }
 
-export default connect(mapStateToProps)(Game)
+export default connect(mapStateToProps)(DrinkingGame)

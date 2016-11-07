@@ -3,6 +3,7 @@ import { browserHistory, Router, Route } from 'react-router'
 import MainTemplate from './templates/main.jsx'
 import Main from './main.jsx'
 import Game from './game.jsx'
+import DrinkingGame from './drinking-game.jsx'
 
 class App extends Component {
   render () {
@@ -10,6 +11,7 @@ class App extends Component {
       <Route component={MainTemplate}>
         <Route path='/' component={Main} />
         <Route path='/game/:game' component={Game} />
+        <Route path='/game/:game/drink/:drinkingGame' component={DrinkingGame} />
       </Route>
     )
 
