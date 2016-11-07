@@ -1,7 +1,7 @@
 import constants from './constants'
 
 const genreAdd = (name) => ({
-  type: constants.genre.ADD,
+  type: constants.genre.ADD.SUCCESS,
   name
 })
 
