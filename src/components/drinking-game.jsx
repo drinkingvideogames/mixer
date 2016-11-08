@@ -1,31 +1,28 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import DrinkingGameCard from './drinking-game-card.jsx'
 
-class Game extends Component {
+class DrinkingGame extends Component {
   render () {
     const game = this.props.games.find((game) => game.url === this.props.routeParams.game)
+    const drinkingGame = this.props.drinkingGames.find((game) => game.url === this.props.routeParams.drinkingGame)
 
     if (game) {
       return (
         <div>
           <nav>
             <div className='nav-wrapper blue'>
-              <a href='#' className='brand-logo center'>{game.name}</a>
+              <Link to={`/game/${game.url}`}>
+                <a href='#' className='brand-logo center'>{game.name}</a>
+              </Link>
             </div>
           </nav>
           <div className='row'>
             <div className='col s12 m12'>
               <div className='card'>
                 <div className='card-content'>
-                  <span className='card-title'>Drinking Games</span>
-                  <div className='row'>
-                    {this.props.drinkingGames.map((drinkingGame, index) => {
-                      return (<div className='col s3 m3' key={index}>
-                        <DrinkingGameCard game={game} drinkingGame={drinkingGame} />
-                      </div>)
-                    })}
-                  </div>
+                  <span className='card-title'>{drinkingGame.name}</span>
+                  <p>Drink some things!</p>
                 </div>
               </div>
             </div>
@@ -42,4 +39,4 @@ const mapStateToProps = (state) => {
   return { games: state.games, drinkingGames: state.drinkingGames }
 }
 
-export default connect(mapStateToProps)(Game)
+export default connect(mapStateToProps)(DrinkingGame)

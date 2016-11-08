@@ -1,3 +1,7 @@
 .autocomplete-content {
   position: relative;
 }
+
+.blue {
+  background-color: #0074b7 !important;
+}

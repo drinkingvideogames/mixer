@@ -1,28 +1,27 @@
 import constants from '../actions/constants'
 
-const game = (state, action) => {
+const drinkingGame = (state, action) => {
   switch (action.type) {
-    case constants.game.ADD.SUCCESS:
+    case constants.drinkingGame.ADD:
       return {
         name: action.name,
-        url: action.url,
-        imageUrl: action.imageUrl
+        url: action.url
       }
     default:
       return state
   }
 }
 
-const games = (state = [], action) => {
+const drinkingGames = (state = [], action) => {
   switch (action.type) {
-    case constants.game.ADD.SUCCESS:
+    case constants.drinkingGame.ADD:
       return [
         ...state,
-        game(undefined, action)
+        drinkingGame(undefined, action)
       ]
     default:
       return state
   }
 }
 
-export default games
+export default drinkingGames

@@ -13,15 +13,14 @@ class GameCard extends Component {
       }
     }
     return (
-      <div className='card small hoverable'>
-        <div className='card-image' style={styles.cardImage} />
-        <div className='card-content'>
-          <p>{this.props.name}</p>
+      <Link to={`/game/${this.props.url}`}>
+        <div className='card small hoverable'>
+          <div className='card-image' style={styles.cardImage} />
+          <div className='card-content'>
+            <span className='card-title grey-text text-darken-4'>{this.props.name}</span>
+          </div>
         </div>
-        <div className='card-action'>
-          <Link to={`/game/${this.props.url}`}>More details!</Link>
-        </div>
-      </div>
+      </Link>
     )
   }
 }

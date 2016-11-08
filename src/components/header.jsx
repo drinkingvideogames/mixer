@@ -2,6 +2,26 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class Header extends Component {
+  componentDidMount () {
+    this.updateAutoComplete()
+  }
+
+  componentDidUpdate () {
+    this.updateAutoComplete()
+  }
+
+  updateAutoComplete () {
+    $(document).ready(() => {
+      const data = this.props.games.reduce((data, game) => {
+        data[game.name] = game.imageUrl
+        return data
+      }, {})
+
+      $('.autocomplete-content').remove()
+      $('input.autocomplete.games').autocomplete({ data })
+    })
+  }
+
   render () {
     const styles = {
       autoCompleteInput: { width: '85%', display: 'inline-block' },
@@ -36,7 +56,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { genres: state.genres }
+  return { genres: state.genres, games: state.games }
 }
 
 export default connect(mapStateToProps)(Header)
