@@ -5,3 +5,7 @@
 .blue {
   background-color: #0074b7 !important;
 }
+
+.image-preview {
+  width: 100%;
+}

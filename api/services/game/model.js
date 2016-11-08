@@ -4,7 +4,9 @@ const Schema = mongoose.Schema
 const GameSchema = new Schema({
   name: { type: String, required: true },
   url: { type: String, required: true },
-  imageUrl: { type: String }
+  imageUrl: { type: String },
+  iconImageUrl: { type: String },
+  genreId: { type: String }
 })
 
 GameSchema.index({ 'name': -1, background: true })
