@@ -3,14 +3,25 @@ import { render } from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
+import actions from './actions'
 import createReducer from './reducers'
 import saga from './sagas'
 import App from './components/app.jsx'
 
+const feathers = require('feathers/client')
+const socketio = require('feathers-socketio/client')
+const hooks = require('feathers-hooks')
+const io = require('socket.io-client')
+
 const sagaMiddleware = createSagaMiddleware()
 
+const socket = io()
+const app = feathers()
+  .configure(hooks())
+  .configure(socketio(socket))
+
 const store = createStore(createReducer(),
-  { genres: [ { name: 'FPS' }, { name: 'MMO' } ],
+  { genres: [],
     games: [
       { imageUrl: '/imgs/icons/league.png', name: 'League of Legends 1', url: 'league' },
       { imageUrl: '/imgs/icons/melee.png', name: 'Super Smash Bros Melee', url: 'melee' },
@@ -24,7 +35,14 @@ const store = createStore(createReducer(),
   },
   applyMiddleware(sagaMiddleware))
 
-sagaMiddleware.run(saga())
+sagaMiddleware.run(saga(app))
+
+const genreService = app.service('genres')
+genreService.find().then((genres) => {
+  genres.data.forEach((genre) => {
+    store.dispatch(actions.genreAdd(genre.name))
+  })
+})
 
 if (module.hot) {
   module.hot.accept('./reducers', () => {
