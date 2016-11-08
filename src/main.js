@@ -44,6 +44,13 @@ genreService.find().then((genres) => {
   })
 })
 
+const gameService = app.service('games')
+gameService.find().then((games) => {
+  games.data.forEach((game) => {
+    store.dispatch(actions.gameAdd(game.name, game.url, game.imageUrl))
+  })
+})
+
 if (module.hot) {
   module.hot.accept('./reducers', () => {
     const createNextRootReducer = require('./reducers/index').default

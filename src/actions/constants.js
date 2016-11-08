@@ -6,7 +6,10 @@ const actionTypes = {
     }
   },
   game: {
-    ADD: 'game/ADD'
+    ADD: {
+      SUCCESS: 'game/ADD/SUCCESS',
+      FAILED: 'game/ADD/FAILED'
+    }
   },
   drinkingGame: {
     ADD: 'drinkingGame/ADD'

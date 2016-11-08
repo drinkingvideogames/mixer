@@ -2,7 +2,7 @@ import constants from '../actions/constants'
 
 const game = (state, action) => {
   switch (action.type) {
-    case constants.game.ADD:
+    case constants.game.ADD.SUCCESS:
       return {
         name: action.name,
         url: action.url,
@@ -15,7 +15,7 @@ const game = (state, action) => {
 
 const games = (state = [], action) => {
   switch (action.type) {
-    case constants.game.ADD:
+    case constants.game.ADD.SUCCESS:
       return [
         ...state,
         game(undefined, action)

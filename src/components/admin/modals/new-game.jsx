@@ -51,7 +51,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    gameAdd: (name, url, imageUrl) => { dispatch(actions.gameAdd(name, url, imageUrl)) }
+    gameAdd: (name, url, imageUrl) => { dispatch({ type: 'GAME_ADD', payload: { name, url, imageUrl } }) }
   }
 }
 

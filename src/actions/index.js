@@ -6,7 +6,7 @@ const genreAdd = (name) => ({
 })
 
 const gameAdd = (name, url, imageUrl) => ({
-  type: constants.game.ADD,
+  type: constants.game.ADD.SUCCESS,
   name,
   url,
   imageUrl
