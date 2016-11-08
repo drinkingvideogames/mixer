@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import actions from '../../../actions'
 
 class NewGenreModal extends Component {
   render () {
@@ -43,7 +42,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    syncGenreAdd: (name) => { dispatch(actions.genreAdd(name)) },
     genreAdd: (name) => { dispatch({ type: 'GENRE_ADD', payload: { name } }) }
   }
 }
