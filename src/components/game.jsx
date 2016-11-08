@@ -21,7 +21,7 @@ class Game extends Component {
                   <span className='card-title'>Drinking Games</span>
                   <div className='row'>
                     {this.props.drinkingGames.map((drinkingGame, index) => {
-                      return (<div className='col s3 m3' key={index}>
+                      return (<div className='col s6 m3' key={index}>
                         <DrinkingGameCard game={game} drinkingGame={drinkingGame} />
                       </div>)
                     })}
