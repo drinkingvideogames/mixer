@@ -13,7 +13,7 @@ class Header extends Component {
   updateAutoComplete () {
     $(document).ready(() => {
       const data = this.props.games.reduce((data, game) => {
-        data[game.name] = game.imageUrl
+        data[game.name] = game.iconImageUrl
         return data
       }, {})
 

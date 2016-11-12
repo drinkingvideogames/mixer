@@ -23,10 +23,10 @@ const app = feathers()
 const store = createStore(createReducer(),
   { genres: [],
     games: [
-      { imageUrl: '/imgs/icons/league.png', name: 'League of Legends 1', url: 'league' },
-      { imageUrl: '/imgs/icons/melee.png', name: 'Super Smash Bros Melee', url: 'melee' },
-      { imageUrl: '/imgs/icons/brawl.png', name: 'Super Smash Bros Brawl', url: 'brawl' },
-      { imageUrl: '/imgs/icons/league.png', name: 'League of Legends 2', url: 'league2' }
+      { iconImageUrl: '/imgs/icons/league.png', imageUrl: '/imgs/icons/league.png', name: 'League of Legends 1', url: 'league' },
+      { iconImageUrl: '/imgs/icons/melee.png', imageUrl: '/imgs/icons/melee.png', name: 'Super Smash Bros Melee', url: 'melee' },
+      { iconImageUrl: '/imgs/icons/brawl.png', imageUrl: '/imgs/icons/brawl.png', name: 'Super Smash Bros Brawl', url: 'brawl' },
+      { iconImageUrl: '/imgs/icons/league.png', imageUrl: '/imgs/icons/league.png', name: 'League of Legends 2', url: 'league2' }
     ],
     drinkingGames: [
       { name: 'Drinking Game 1', url: 'drinkme' },
