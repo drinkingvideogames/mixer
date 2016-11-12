@@ -2,10 +2,47 @@ import { takeEvery } from 'redux-saga'
 import { put } from 'redux-saga/effects'
 import actions from '../actions'
 
+function upload (service, file) {
+  function getBlob (file) {
+    return new Promise((resolve, reject) => {
+      const xhr = new window.XMLHttpRequest()
+      xhr.open('GET', file.preview, true)
+      xhr.responseType = 'blob'
+      xhr.onload = function (e) {
+        if (this.status === 200) {
+          var myBlob = this.response
+          return resolve(myBlob)
+        } else {
+          return reject()
+        }
+      }
+      xhr.send()
+    })
+  }
+
+  function getDataUri (blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new window.FileReader()
+      reader.onload = () => resolve(reader.result)
+      reader.readAsDataURL(blob)
+    })
+  }
+
+  return new Promise((resolve, reject) => {
+    getBlob(file)
+      .then(getDataUri)
+      .then((data) => {
+        service
+          .create({ uri: data })
+          .then(resolve)
+          .catch(reject)
+      })
+  })
+}
+
 export default function makeSaga (app) {
   function* addGenre (action) {
     try {
-      console.log('making genre', action.payload)
       const genre = yield app.service('genres').create(action.payload)
       yield put(actions.genreAdd(genre.name))
     } catch (e) {
@@ -15,7 +52,10 @@ export default function makeSaga (app) {
 
   function* addGame (action) {
     try {
-      console.log('making game', action.payload)
+      const image = yield upload(app.service('gameimages'), action.payload.image)
+      const iconImage = yield upload(app.service('gameicons'), action.payload.iconImage)
+      action.payload.imageUrl = '/uploads/imgs/images/' + image.id
+      action.payload.iconImageUrl = '/uploads/imgs/icons/' + iconImage.id
       const game = yield app.service('games').create(action.payload)
       yield put(actions.gameAdd(game.name, game.url, game.imageUrl))
     } catch (e) {

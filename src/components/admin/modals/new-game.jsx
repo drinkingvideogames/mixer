@@ -19,8 +19,13 @@ class NewGameModal extends Component {
   render () {
     const iconImage = this.input['iconImage']
     const image = this.input['image']
-    const iconDrop = iconImage && iconImage.preview ? <img className='image-preview' src={iconImage.preview} /> : <div>Upload Icon Image</div>
-    const imageDrop = image && image.preview ? <img className='image-preview' src={image.preview} /> : <div>Upload Icon Image</div>
+    const iconDrop = iconImage && iconImage.preview ? <img className='image-preview' src={iconImage.preview} /> : <div>Click or drop to upload Icon Image</div>
+    const imageDrop = image && image.preview ? <img className='image-preview' src={image.preview} /> : <div>Click or drop to upload Icon Image</div>
+    const dropStyles = {
+      backgroundColor: '#eee',
+      textAlign: 'center',
+      minHeight: '10vh'
+    }
     return (
       <div id='newGameModal' className='modal modal-fixed-footer'>
         <div className='modal-content'>
@@ -43,12 +48,12 @@ class NewGameModal extends Component {
                 </div>
                 <div className='row'>
                   <div className='col s12 m6'>
-                    <Dropzone style={{}} onDrop={this.onDrop.bind(this, 'iconImage')} multiple={false} accept={'image/*'}>
+                    <Dropzone style={dropStyles} onDrop={this.onDrop.bind(this, 'iconImage')} multiple={false} accept={'image/*'}>
                       {iconDrop}
                     </Dropzone>
                   </div>
                   <div className='col s12 m6'>
-                    <Dropzone style={{}} onDrop={this.onDrop.bind(this, 'image')} multiple={false} accept={'image/*'}>
+                    <Dropzone style={dropStyles} onDrop={this.onDrop.bind(this, 'image')} multiple={false} accept={'image/*'}>
                       {imageDrop}
                     </Dropzone>
                   </div>
@@ -62,7 +67,7 @@ class NewGameModal extends Component {
             e.preventDefault()
             if (!this.input.gameName.value.trim()) return
             if (!this.input.gameUrl.value.trim()) return
-            this.props.gameAdd(this.input.gameName.value, this.input.gameUrl.value, '', '')
+            this.props.gameAdd(this.input.gameName.value, this.input.gameUrl.value, this.input.image, this.input.iconImage)
             this.input.gameName.value = ''
             this.input.gameUrl.value = ''
           }} className='modal-action modal-close waves-effect waves-green btn green right'>Save</a>

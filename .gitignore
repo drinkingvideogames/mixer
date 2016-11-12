@@ -80,3 +80,6 @@ GitHub.sublime-settings
 # Generated files
 public/js/bundle.js
 public/js/bundle.js.map
+
+# Uploaded files
+public/uploads
