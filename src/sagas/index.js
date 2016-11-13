@@ -57,7 +57,7 @@ export default function makeSaga (app) {
       action.payload.imageUrl = '/uploads/imgs/images/' + image.id
       action.payload.iconImageUrl = '/uploads/imgs/icons/' + iconImage.id
       const game = yield app.service('games').create(action.payload)
-      yield put(actions.gameAdd(game.name, game.url, game.imageUrl))
+      yield put(actions.gameAdd(game.name, game.url, game.imageUrl, game.iconImageUrl))
     } catch (e) {
       yield put({ type: 'game/ADD/FAILED', message: e.message })
     }

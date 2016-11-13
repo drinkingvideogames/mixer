@@ -47,7 +47,7 @@ genreService.find().then((genres) => {
 const gameService = app.service('games')
 gameService.find().then((games) => {
   games.data.forEach((game) => {
-    store.dispatch(actions.gameAdd(game.name, game.url, game.imageUrl))
+    store.dispatch(actions.gameAdd(game.name, game.url, game.imageUrl, game.iconImageUrl))
   })
 })
 

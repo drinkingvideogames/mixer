@@ -5,11 +5,12 @@ const genreAdd = (name) => ({
   name
 })
 
-const gameAdd = (name, url, imageUrl) => ({
+const gameAdd = (name, url, imageUrl, iconImageUrl) => ({
   type: constants.game.ADD.SUCCESS,
   name,
   url,
-  imageUrl
+  imageUrl,
+  iconImageUrl
 })
 
 const drinkingGameAdd = (game, name, url) => ({
