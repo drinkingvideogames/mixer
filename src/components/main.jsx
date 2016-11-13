@@ -7,7 +7,7 @@ class Main extends Component {
     return (
       <div className='row'>
         {this.props.games.map((game, index) => {
-          return (<div className='col s6 m3' key={index}>
+          return (<div className='col s12 m6 l3' key={index}>
             <GameCard imageUrl={game.imageUrl} name={game.name} url={game.url} />
           </div>)
         })}
