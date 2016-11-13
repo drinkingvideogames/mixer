@@ -1,7 +1,7 @@
 const commonHooks = require('../lib/hooks')
 
 const before = {
-  create: 
+  create:
     [ commonHooks.setCurrentDateHook('createdAt'),
       commonHooks.setCurrentDateHook('updatedAt')
     ],

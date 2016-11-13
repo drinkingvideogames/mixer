@@ -14,7 +14,7 @@ function prepareAssetEntry (assetServiceName, tags) {
 }
 
 const before = {
-  create: 
+  create:
     [ commonHooks.setCurrentDateHook('createdAt'),
       commonHooks.setCurrentDateHook('updatedAt')
     ],
@@ -30,7 +30,7 @@ const iconsAfter = {
   create: [ prepareAssetEntry('gameicons', [ 'game', 'icon' ]) ]
 }
 
-module.exports = { 
+module.exports = {
   gameHooks: { before },
   imageHooks: { after: imagesAfter },
   iconHooks: { after: iconsAfter }
