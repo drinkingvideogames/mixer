@@ -4,6 +4,7 @@ const blobService = require('feathers-blob')
 const blobFs = require('fs-blob-store')
 const mkdirp = require('mkdirp')
 const model = require('./model')
+const hooks = require('./hooks')
 
 module.exports = function () {
   const app = this
@@ -28,8 +29,19 @@ module.exports = function () {
   const imageStorage = blobFs(directories.images)
 
   app.use('/games', service(options))
-  const iconsService = app.use('/gameicons', blobService({ Model: iconStorage }))
+
+  const gamesService = app.service('games')
+  gamesService.before(hooks.gameHooks.before)
+
+  app.use('/gameicons', blobService({ Model: iconStorage }))
+
+  const iconsService = app.service('gameicons')
   iconsService.baseUrl = '/uploads/imgs/icons/'
-  const imagesService = app.use('/gameimages', blobService({ Model: imageStorage }))
+  iconsService.after(hooks.iconHooks.after)
+
+  app.use('/gameimages', blobService({ Model: imageStorage }))
+
+  const imagesService = app.service('gameimages')
   imagesService.baseUrl = '/uploads/imgs/images/'
+  imagesService.after(hooks.imageHooks.after)
 }
