@@ -19,12 +19,18 @@ class NewGameModal extends Component {
   render () {
     const iconImage = this.input['iconImage']
     const image = this.input['image']
-    const iconDrop = iconImage && iconImage.preview ? <img className='image-preview' src={iconImage.preview} /> : <div>Click or drop to upload Icon Image</div>
-    const imageDrop = image && image.preview ? <img className='image-preview' src={image.preview} /> : <div>Click or drop to upload Icon Image</div>
+    const iconDrop = iconImage && iconImage.preview 
+      ? <img className='image-preview' src={iconImage.preview} />
+      : <div className='image-preview'>Click or drop to upload Icon Image</div>
+    const imageDrop = image && image.preview 
+      ? <img className='image-preview' src={image.preview} />
+      : <div className='image-preview'>Click or drop to upload Main Image</div>
     const dropStyles = {
       backgroundColor: '#eee',
       textAlign: 'center',
-      minHeight: '10vh'
+      minHeight: '10vh',
+      display: 'table',
+      width: '100%'
     }
     return (
       <div id='newGameModal' className='modal modal-fixed-footer'>
