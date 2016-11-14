@@ -19,10 +19,10 @@ class NewGameModal extends Component {
   render () {
     const iconImage = this.input['iconImage']
     const image = this.input['image']
-    const iconDrop = iconImage && iconImage.preview 
+    const iconDrop = iconImage && iconImage.preview
       ? <img className='image-preview' src={iconImage.preview} />
       : <div className='image-preview'>Click or drop to upload Icon Image</div>
-    const imageDrop = image && image.preview 
+    const imageDrop = image && image.preview
       ? <img className='image-preview' src={image.preview} />
       : <div className='image-preview'>Click or drop to upload Main Image</div>
     const dropStyles = {
