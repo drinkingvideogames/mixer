@@ -24,9 +24,10 @@ class Header extends Component {
 
   render () {
     const styles = {
-      autoCompleteInput: { width: '85%', display: 'inline-block' },
+      autoCompleteInput: { width: '80%', display: 'inline-block' },
       genreBlock: { width: '15%', display: 'inline-block', textAlign: 'center', float: 'right' },
-      genreButton: { height: '100%', width: '100%', display: 'block' }
+      genreButton: { height: '100%', width: '100%', display: 'block' },
+      accountButton: { width: '5%', display: 'inline-block', textAlign: 'center', float: 'right' }
     }
 
     const genres = this.props.genres.length > 0 ? this.props.genres.map((genre, index) => {
@@ -41,6 +42,9 @@ class Header extends Component {
               <input type='search' id='autocomplete-input' className='autocomplete games' autoComplete='off' />
               <label htmlFor='autocomplete'><i className='material-icons'>search</i></label>
               <i className='material-icons'>close</i>
+            </div>
+            <div style={styles.accountButton}>
+              <a className='modal-trigger' href='#loginModal'><i className='material-icons'>account_circle</i></a>
             </div>
             <div style={styles.genreBlock}>
               <a className='dropdown-button' href='#' data-activates='genresDropdown' style={styles.genreButton}>Genres</a>

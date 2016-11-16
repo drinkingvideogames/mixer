@@ -13,6 +13,16 @@ const actionTypes = {
   },
   drinkingGame: {
     ADD: 'drinkingGame/ADD'
+  },
+  user: {
+    LOGIN: {
+      SUCCESS: 'user/LOGIN/SUCCESS',
+      FAILED: 'user/LOGIN/FAILED'
+    },
+    REGISTER: {
+      SUCCESS: 'user/REGISTER/SUCCESS',
+      FAILED: 'user/REGISTER/FAILED'
+    }
   }
 }
 

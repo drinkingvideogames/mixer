@@ -62,9 +62,30 @@ export default function makeSaga (app) {
       yield put({ type: 'game/ADD/FAILED', message: e.message })
     }
   }
+  
+  function* loginUser (action) {
+    try {
+      console.log(action)
+      const user = yield app.service('users').find({ query: action.payload })
+      console.log(user)
+      yield put(actions.userLogin(user.email, user.password))
+    } catch (e) {
+      console.log("error ", e)
+      yield put({ type: 'user/LOGIN/FAILED', message: e.message })
+    }
+  }
+  
+  function* registerUser (action) {
+    try {
+      const user = yield app.service('users').create(action.payload)
+      yield put(actions.userRegister(user.email, user.password))
+    } catch (e) {
+      yield put({ type: 'user/REGISTER/FAILED', message: e.message })
+    }
+  }
 
   function* mySaga () {
-    yield [ takeEvery('GENRE_ADD', addGenre), takeEvery('GAME_ADD', addGame) ]
+    yield [ takeEvery('GENRE_ADD', addGenre), takeEvery('GAME_ADD', addGame), takeEvery('USER_LOGIN', loginUser), takeEvery('USER_REGISTER', registerUser) ]
   }
 
   return mySaga
