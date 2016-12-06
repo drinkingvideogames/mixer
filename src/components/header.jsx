@@ -26,7 +26,7 @@ class Header extends Component {
   goBack () {
     browserHistory.goBack()
   }
-  
+
   render () {
     const styles = {
       autoCompleteInput: { width: '80%', display: 'inline-block' },
@@ -48,7 +48,7 @@ class Header extends Component {
         <i className='material-icons'>arrow_back</i>
       </div>
     )
-    
+
     return (
       <nav>
         <div className='nav-wrapper blue'>
