@@ -32,7 +32,13 @@ class Header extends Component {
       autoCompleteInput: { width: '80%', display: 'inline-block' },
       genreBlock: { width: '15%', display: 'inline-block', textAlign: 'center', float: 'right' },
       genreButton: { height: '100%', width: '100%', display: 'block' },
-	  backButton: { width: '5%', textAlign: 'center', display: 'inline-block', float: 'left' }
+      backButton: {
+        width: '5%',
+        textAlign: 'center',
+        display: 'inline-block',
+        float: 'left',
+        cursor: 'pointer'
+      }
     }
 
     const genres = this.props.genres.length > 0 ? this.props.genres.map((genre, index) => {
