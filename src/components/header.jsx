@@ -39,7 +39,11 @@ class Header extends Component {
       return (<li key={index}><a href='#!'>{genre.name}</a></li>)
     }) : (<li><a href='#!'>No genres to list!</a></li>)
 
-    const homeIcon = (
+    const homeIcon = this.props.isHome ? (
+      <div style={styles.backButton}>
+        Home
+      </div>
+    ) : (
       <div style={styles.backButton} onClick={this.goBack}>
         <i className='material-icons'>arrow_back</i>
       </div>
