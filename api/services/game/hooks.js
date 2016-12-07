@@ -15,9 +15,9 @@ function prepareAssetEntry (assetServiceName, tags) {
 
 const before = {
   create:
-    [ commonHooks.setCurrentDateHook('createdAt'),
-      commonHooks.setCurrentDateHook('updatedAt')
-    ],
+  [ commonHooks.setCurrentDateHook('createdAt'),
+    commonHooks.setCurrentDateHook('updatedAt')
+  ],
   update: [ commonHooks.setCurrentDateHook('updatedAt') ],
   patch: [ commonHooks.setCurrentDateHook('updatedAt') ]
 }
