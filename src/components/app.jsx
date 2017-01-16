@@ -8,10 +8,14 @@ import DrinkingGame from './drinking-game.jsx'
 class App extends Component {
   render () {
     const routes = (
-      <Route component={MainTemplate}>
-        <Route path='/' component={Main} />
-        <Route path='/game/:game' component={Game} />
-        <Route path='/game/:game/drink/:drinkingGame' component={DrinkingGame} />
+      <Route>
+        <Route component={MainTemplate} isHome>
+          <Route path='/' component={Main} />
+        </Route>
+        <Route component={MainTemplate}>
+          <Route path='/game/:game' component={Game} />
+          <Route path='/game/:game/drink/:drinkingGame' component={DrinkingGame} />
+        </Route>
       </Route>
     )
 

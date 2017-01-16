@@ -6,7 +6,7 @@ class MainTemplate extends Component {
   render () {
     return (
       <div>
-        <Header />
+        <Header isHome={this.props.route.hasOwnProperty('isHome')} />
         <div className='container'>
           {this.props.children}
         </div>
