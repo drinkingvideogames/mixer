@@ -47,8 +47,8 @@ class Header extends Component {
       ].join('')
     }
     swal(this.getModalSettings(settings), () => {
-      let email = $('.js-sw-login-email').val().trim(),
-          password = $('.js-sw-login-password').val().trim()
+      let email = $('.js-sw-login-email').val().trim()
+      let password = $('.js-sw-login-password').val().trim()
       this.props.userLogin(email, password)
     })
   }
@@ -62,8 +62,8 @@ class Header extends Component {
       ].join('')
     }
     swal(this.getModalSettings(settings), () => {
-      let email = $('.js-sw-register-email').val().trim(),
-          password = $('.js-sw-register-password').val().trim()
+      let email = $('.js-sw-register-email').val().trim()
+      let password = $('.js-sw-register-password').val().trim()
       this.props.userRegister(email, password)
     })
   }

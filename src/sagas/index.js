@@ -96,7 +96,7 @@ export default function makeSaga (app) {
 
   function* logoutUser (action) {
     try {
-      const logout = yield app.logout()
+      yield app.logout()
       yield put(actions.userLogout())
     } catch (e) {
       yield put({ type: 'user/LOGOUT/FAILED', message: e.message })

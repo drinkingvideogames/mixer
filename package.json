@@ -73,7 +73,11 @@
   },
   "standard": {
     "globals": [
-      "$"
+      "$",
+      "swal"
+    ],
+    "ignore": [
+      "**/vendor/**"
     ]
   }
 }
