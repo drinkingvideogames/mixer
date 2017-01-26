@@ -40,6 +40,15 @@ function upload (service, file) {
   })
 }
 
+function login (app, action) {
+  if (!action.payload.strategy) {
+    action.payload.strategy = 'local'
+  }
+  return app.authenticate(action.payload)
+    .then(response => app.passport.verifyJWT(response.accessToken))
+    .then(payload => app.service('users').get(payload.userId))
+}
+
 export default function makeSaga (app) {
   function* addGenre (action) {
     try {
@@ -62,30 +71,46 @@ export default function makeSaga (app) {
       yield put({ type: 'game/ADD/FAILED', message: e.message })
     }
   }
-  
+
   function* loginUser (action) {
     try {
-      console.log(action)
-      const user = yield app.service('users').find({ query: action.payload })
-      console.log(user)
-      yield put(actions.userLogin(user.email, user.password))
+      const user = yield login(app, action)
+      yield put(actions.userLogin(user.email))
     } catch (e) {
-      console.log("error ", e)
       yield put({ type: 'user/LOGIN/FAILED', message: e.message })
     }
   }
-  
+
   function* registerUser (action) {
     try {
-      const user = yield app.service('users').create(action.payload)
-      yield put(actions.userRegister(user.email, user.password))
+      const loginAction = yield app.service('users').create(action.payload)
+        .then((data) => {
+          return { payload: { email: data.email, password: action.payload.password } }
+        })
+      const loggedInUser = yield login(app, loginAction)
+      yield put(actions.userLogin(loggedInUser.email))
     } catch (e) {
       yield put({ type: 'user/REGISTER/FAILED', message: e.message })
     }
   }
 
+  function* logoutUser (action) {
+    try {
+      const logout = yield app.logout()
+      yield put(actions.userLogout())
+    } catch (e) {
+      yield put({ type: 'user/LOGOUT/FAILED', message: e.message })
+    }
+  }
+
   function* mySaga () {
-    yield [ takeEvery('GENRE_ADD', addGenre), takeEvery('GAME_ADD', addGame), takeEvery('USER_LOGIN', loginUser), takeEvery('USER_REGISTER', registerUser) ]
+    yield [
+      takeEvery('GENRE_ADD', addGenre),
+      takeEvery('GAME_ADD', addGame),
+      takeEvery('USER_LOGIN', loginUser),
+      takeEvery('USER_REGISTER', registerUser),
+      takeEvery('USER_LOGOUT', logoutUser)
+    ]
   }
 
   return mySaga

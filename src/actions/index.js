@@ -19,16 +19,13 @@ const drinkingGameAdd = (game, name, url) => ({
   url
 })
 
-const userLogin = (email, password) => ({
+const userLogin = (email) => ({
   type: constants.user.LOGIN.SUCCESS,
-  email,
-  password
+  email
 })
 
-const userRegister = (email, password) => ({
-  type: constants.user.REGISTER.SUCCESS,
-  email,
-  password
+const userLogout = () => ({
+  type: constants.user.LOGOUT.SUCCESS
 })
 
 export default {
@@ -36,5 +33,5 @@ export default {
   gameAdd,
   drinkingGameAdd,
   userLogin,
-  userRegister
+  userLogout
 }

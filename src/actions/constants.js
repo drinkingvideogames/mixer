@@ -22,6 +22,10 @@ const actionTypes = {
     REGISTER: {
       SUCCESS: 'user/REGISTER/SUCCESS',
       FAILED: 'user/REGISTER/FAILED'
+    },
+    LOGOUT: {
+      SUCCESS: 'user/LOGOUT/SUCCESS',
+      FAILED: 'user/LOGOUT/FAILED'
     }
   }
 }

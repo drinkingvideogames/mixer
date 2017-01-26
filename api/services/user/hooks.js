@@ -1,43 +1,23 @@
-const hooks = require('feathers-hooks');
-const auth = require('feathers-authentication').hooks;
+const auth = require('feathers-authentication').hooks
+const local = require('feathers-authentication-local').hooks
+const hooks = require('feathers-hooks-common')
 
-exports.before = {
-  all: [],
+const before = {
   find: [
-    auth.hashPassword()
+    auth.authenticate('jwt')
+  ],
+  create: [
+    local.hashPassword({ passwordField: 'password' })
+  ]
+}
+
+const after = {
+  find: [
+    hooks.remove('password')
   ],
   get: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated()
-  ],
-  create: [auth.hashPassword()],
-  update: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated(),
-    auth.restrictToOwner({ ownerField: '_id' })
-  ],
-  patch: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated(),
-    auth.restrictToOwner({ ownerField: '_id' })
-  ],
-  remove: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated(),
-    auth.restrictToOwner({ ownerField: '_id' })
+    hooks.remove('password')
   ]
-};
+}
 
-exports.after = {
-  all: [hooks.remove('password')],
-  find: [],
-  get: [],
-  create: [],
-  update: [],
-  patch: [],
-  remove: []
-};
+module.exports = { before, after }
