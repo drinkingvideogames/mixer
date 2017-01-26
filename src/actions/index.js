@@ -19,8 +19,19 @@ const drinkingGameAdd = (game, name, url) => ({
   url
 })
 
+const userLogin = (email) => ({
+  type: constants.user.LOGIN.SUCCESS,
+  email
+})
+
+const userLogout = () => ({
+  type: constants.user.LOGOUT.SUCCESS
+})
+
 export default {
   genreAdd,
   gameAdd,
-  drinkingGameAdd
+  drinkingGameAdd,
+  userLogin,
+  userLogout
 }

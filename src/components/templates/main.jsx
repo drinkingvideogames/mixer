@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Header from '../header.jsx'
 import AdminToolbar from '../admin.jsx'
 
@@ -10,10 +11,14 @@ class MainTemplate extends Component {
         <div className='container'>
           {this.props.children}
         </div>
-        <AdminToolbar />
+        { this.props.user.email ? <AdminToolbar /> : '' }
       </div>
     )
   }
 }
 
-export default MainTemplate
+const mapStateToProps = (state) => {
+  return { user: state.user }
+}
+
+export default connect(mapStateToProps)(MainTemplate)

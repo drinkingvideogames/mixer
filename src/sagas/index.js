@@ -40,6 +40,15 @@ function upload (service, file) {
   })
 }
 
+function login (app, action) {
+  if (!action.payload.strategy) {
+    action.payload.strategy = 'local'
+  }
+  return app.authenticate(action.payload)
+    .then(response => app.passport.verifyJWT(response.accessToken))
+    .then(payload => app.service('users').get(payload.userId))
+}
+
 export default function makeSaga (app) {
   function* addGenre (action) {
     try {
@@ -63,8 +72,45 @@ export default function makeSaga (app) {
     }
   }
 
+  function* loginUser (action) {
+    try {
+      const user = yield login(app, action)
+      yield put(actions.userLogin(user.email))
+    } catch (e) {
+      yield put({ type: 'user/LOGIN/FAILED', message: e.message })
+    }
+  }
+
+  function* registerUser (action) {
+    try {
+      const loginAction = yield app.service('users').create(action.payload)
+        .then((data) => {
+          return { payload: { email: data.email, password: action.payload.password } }
+        })
+      const loggedInUser = yield login(app, loginAction)
+      yield put(actions.userLogin(loggedInUser.email))
+    } catch (e) {
+      yield put({ type: 'user/REGISTER/FAILED', message: e.message })
+    }
+  }
+
+  function* logoutUser (action) {
+    try {
+      yield app.logout()
+      yield put(actions.userLogout())
+    } catch (e) {
+      yield put({ type: 'user/LOGOUT/FAILED', message: e.message })
+    }
+  }
+
   function* mySaga () {
-    yield [ takeEvery('GENRE_ADD', addGenre), takeEvery('GAME_ADD', addGame) ]
+    yield [
+      takeEvery('GENRE_ADD', addGenre),
+      takeEvery('GAME_ADD', addGame),
+      takeEvery('USER_LOGIN', loginUser),
+      takeEvery('USER_REGISTER', registerUser),
+      takeEvery('USER_LOGOUT', logoutUser)
+    ]
   }
 
   return mySaga
