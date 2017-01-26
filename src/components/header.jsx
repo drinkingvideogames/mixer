@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 class Header extends Component {
   componentDidMount () {
@@ -68,15 +68,26 @@ class Header extends Component {
     })
   }
 
+  goBack () {
+    browserHistory.goBack()
+  }
+
   render () {
     const styles = {
-      autoCompleteInput: { width: '75%', display: 'inline-block' },
+      autoCompleteInput: { width: '70%', display: 'inline-block' },
       rightBlock: { width: '25%' },
-      genreButton: { width: '50%', textAlign: 'center' }
+      genreButton: { width: '50%', textAlign: 'center' },
+      backButton: {
+        width: '5%',
+        textAlign: 'center',
+        display: 'inline-block',
+        float: 'left',
+        cursor: 'pointer'
+      }
     }
 
     if (this.props.user.email) {
-      styles.autoCompleteInput.width = '85%'
+      styles.autoCompleteInput.width = '80%'
       styles.rightBlock.width = '15%'
       styles.genreButton.width = '70%'
     }
@@ -85,10 +96,21 @@ class Header extends Component {
       return (<li key={index}><a href='#!'>{genre.name}</a></li>)
     }) : (<li><a href='#!'>No genres to list!</a></li>)
 
+    const homeIcon = this.props.isHome ? (
+      <div style={styles.backButton}>
+        Home
+      </div>
+    ) : (
+      <div style={styles.backButton} onClick={this.goBack}>
+        <i className='material-icons'>arrow_back</i>
+      </div>
+    )
+
     return (
       <nav>
         <div className='nav-wrapper blue'>
           <form>
+            {homeIcon}
             <div className='input-field' style={styles.autoCompleteInput}>
               <input type='search' id='autocomplete-input' className='autocomplete games' autoComplete='off' />
               <label htmlFor='autocomplete'><i className='material-icons'>search</i></label>

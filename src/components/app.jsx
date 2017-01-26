@@ -10,11 +10,15 @@ import Profile from './profile.jsx'
 class App extends Component {
   render () {
     const routes = (
-      <Route component={MainTemplate}>
-        <Route path='/' component={Main} />
-        <Route path='/game/:game' component={Game} />
-        <Route path='/game/:game/drink/:drinkingGame' component={DrinkingGame} />
-        <Route path='/profile' component={Profile} />
+      <Route>
+        <Route component={MainTemplate} isHome>
+          <Route path='/' component={Main} />
+        </Route>
+        <Route component={MainTemplate}>
+          <Route path='/game/:game' component={Game} />
+          <Route path='/game/:game/drink/:drinkingGame' component={DrinkingGame} />
+          <Route path='/profile' component={Profile} />
+        </Route>
       </Route>
     )
 
