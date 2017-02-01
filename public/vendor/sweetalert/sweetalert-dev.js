@@ -323,7 +323,9 @@ var defaultParams = {
   closeOnCancel: true,
   confirmButtonText: 'OK',
   confirmButtonColor: '#8CD4F5',
+  confirmButtonTabIndex: 1,
   cancelButtonText: 'Cancel',
+  cancelButtonTabIndex: 2,
   imageUrl: null,
   imageSize: null,
   timer: null,
@@ -705,25 +707,25 @@ var handleKeyDown = function handleKeyDown(event, params, modal) {
   }
 
   if (keyCode === 9) {
-    // TAB
-    if (btnIndex === -1) {
-      // No button focused. Jump to the confirm button.
-      $targetElement = $okButton;
-    } else {
-      // Cycle to the next button
-      if (btnIndex === $modalButtons.length - 1) {
-        $targetElement = $modalButtons[0];
-      } else {
-        $targetElement = $modalButtons[btnIndex + 1];
-      }
-    }
+    // // TAB
+    // if (btnIndex === -1) {
+    //   // No button focused. Jump to the confirm button.
+    //   $targetElement = $okButton;
+    // } else {
+    //   // Cycle to the next button
+    //   if (btnIndex === $modalButtons.length - 1) {
+    //     $targetElement = $modalButtons[0];
+    //   } else {
+    //     $targetElement = $modalButtons[btnIndex + 1];
+    //   }
+    // }
 
-    _stopEventPropagation$fireClick.stopEventPropagation(e);
-    $targetElement.focus();
+    // _stopEventPropagation$fireClick.stopEventPropagation(e);
+    // $targetElement.focus();
 
-    if (params.confirmButtonColor) {
-      _setFocusStyle.setFocusStyle($targetElement, params.confirmButtonColor);
-    }
+    // if (params.confirmButtonColor) {
+    //   _setFocusStyle.setFocusStyle($targetElement, params.confirmButtonColor);
+    // }
   } else {
     if (keyCode === 13) {
       if ($targetElement.tagName === 'INPUT') {
@@ -989,6 +991,14 @@ var setParameters = function setParameters(params) {
   var $text = modal.querySelector('p');
   var $cancelBtn = modal.querySelector('button.cancel');
   var $confirmBtn = modal.querySelector('button.confirm');
+
+
+  /*
+   * Tab Index
+   */
+
+  $cancelBtn.setAttribute('tabindex', params.cancelButtonTabIndex);
+  $confirmBtn.setAttribute('tabindex', params.confirmButtonTabIndex);
 
   /*
    * Title

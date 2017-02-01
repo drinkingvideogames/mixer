@@ -32,7 +32,9 @@ class Header extends Component {
         customClass: 'show-input',
         showLoaderOnConfirm: true,
         closeOnConfirm: false,
-        allowOutsideClick: true
+        allowOutsideClick: true,
+        confirmButtonTabIndex: 3,
+        cancelButtonTabIndex: 4
       },
       extras
     )
@@ -42,8 +44,8 @@ class Header extends Component {
     let settings = {
       confirmButtonText: 'Login',
       text: [
-        '<input class="js-sw-login-email" type="email" placeholder="Email"/>',
-        '<input class="js-sw-login-password" type="password" placeholder="Password"/>'
+        '<input class="js-sw-login-email" type="email" placeholder="Email" tabindex="1"/>',
+        '<input class="js-sw-login-password" type="password" placeholder="Password" tabindex="2"/>'
       ].join('')
     }
     swal(this.getModalSettings(settings), () => {
@@ -57,8 +59,8 @@ class Header extends Component {
     let settings = {
       confirmButtonText: 'Register',
       text: [
-        '<input class="js-sw-register-email" type="email" placeholder="Email"/>',
-        '<input class="js-sw-register-password" type="password" placeholder="Password"/>'
+        '<input class="js-sw-register-email" type="email" placeholder="Email" tabindex="1"/>',
+        '<input class="js-sw-register-password" type="password" placeholder="Password" tabindex="2"/>'
       ].join('')
     }
     swal(this.getModalSettings(settings), () => {
