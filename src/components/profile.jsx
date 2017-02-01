@@ -21,13 +21,13 @@ class Profile extends Component {
   render () {
     return (
       <div className='row'>
-        <div className="card-panel">
+        <div className='card-panel'>
           <Toolbar>
             <ToolbarGroup>
               <ToolbarTitle text={`Account: ${this.props.user.email}`} />
             </ToolbarGroup>
             <ToolbarGroup>
-              <RaisedButton label='Logout' primary={true} onClick={this.logout.bind(this)} />
+              <RaisedButton label='Logout' onClick={this.logout.bind(this)} />
             </ToolbarGroup>
           </Toolbar>
         </div>
