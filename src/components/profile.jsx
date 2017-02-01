@@ -27,7 +27,7 @@ class Profile extends Component {
               <ToolbarTitle text={`Account: ${this.props.user.email}`} />
             </ToolbarGroup>
             <ToolbarGroup>
-              <RaisedButton label='Logout' onClick={this.logout.bind(this)} />
+              <RaisedButton label='Logout' primary onClick={this.logout.bind(this)} />
             </ToolbarGroup>
           </Toolbar>
         </div>
