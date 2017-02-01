@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
+import RaisedButton from 'material-ui/RaisedButton'
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
 
 class Profile extends Component {
   componentDidMount () {
@@ -19,8 +21,16 @@ class Profile extends Component {
   render () {
     return (
       <div className='row'>
-        {this.props.user.email}
-        <button onClick={this.logout.bind(this)}>Logout</button>
+        <div className="card-panel">
+          <Toolbar>
+            <ToolbarGroup>
+              <ToolbarTitle text={`Account: ${this.props.user.email}`} />
+            </ToolbarGroup>
+            <ToolbarGroup>
+              <RaisedButton label='Logout' primary={true} onClick={this.logout.bind(this)} />
+            </ToolbarGroup>
+          </Toolbar>
+        </div>
       </div>
     )
   }

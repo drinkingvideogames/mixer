@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { browserHistory, Router, Route } from 'react-router'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import muiTheme from './custom-theme'
 import MainTemplate from './templates/main.jsx'
 import Main from './main.jsx'
 import Game from './game.jsx'
@@ -23,7 +24,7 @@ class App extends Component {
     )
 
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <Router history={browserHistory}>
           {routes}
         </Router>
