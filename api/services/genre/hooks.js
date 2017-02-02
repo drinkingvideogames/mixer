@@ -1,6 +1,6 @@
 const commonHooks = require('../lib/hooks')
 
-module.exports = genreHooks = {
+const genreHooks = {
   before: {
     create: [
       commonHooks.requireAuth(),
@@ -10,3 +10,5 @@ module.exports = genreHooks = {
     ]
   }
 }
+
+module.exports = genreHooks
