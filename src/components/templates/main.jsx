@@ -11,7 +11,7 @@ class MainTemplate extends Component {
         <div className='container'>
           {this.props.children}
         </div>
-        { this.props.user.email ? <AdminToolbar /> : '' }
+        { this.props.user.email && this.props.user.verified ? <AdminToolbar /> : '' }
       </div>
     )
   }
