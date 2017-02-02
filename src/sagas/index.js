@@ -62,8 +62,8 @@ export default function makeSaga (app) {
 
   function* addGame (action) {
     try {
-      const image = yield upload(app.service('gameimages'), action.payload.image)
-      const iconImage = yield upload(app.service('gameicons'), action.payload.iconImage)
+      const image = yield upload(app.service('gameimages'), action.payload.imageUrl)
+      const iconImage = yield upload(app.service('gameicons'), action.payload.iconImageUrl)
       action.payload.imageUrl = '/uploads/imgs/images/' + image.id
       action.payload.iconImageUrl = '/uploads/imgs/icons/' + iconImage.id
       const game = yield app.service('games').create(action.payload)
