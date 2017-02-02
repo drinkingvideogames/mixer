@@ -5,12 +5,13 @@ const genreAdd = (name) => ({
   name
 })
 
-const gameAdd = (name, url, imageUrl, iconImageUrl) => ({
+const gameAdd = (game) => ({
   type: constants.game.ADD.SUCCESS,
-  name,
-  url,
-  imageUrl,
-  iconImageUrl
+  name: game.name,
+  userId: game.userId,
+  url: game.url,
+  imageUrl: game.imageUrl,
+  iconImageUrl: game.iconImageUrl
 })
 
 const drinkingGameAdd = (game, name, url) => ({
@@ -19,9 +20,10 @@ const drinkingGameAdd = (game, name, url) => ({
   url
 })
 
-const userLogin = (email) => ({
+const userLogin = (user) => ({
   type: constants.user.LOGIN.SUCCESS,
-  email
+  _id: user._id,
+  email: user.email
 })
 
 const userLoginFail = (e) => ({

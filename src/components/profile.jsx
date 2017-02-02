@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router'
+import { Link, withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
@@ -29,6 +29,19 @@ class Profile extends Component {
         </TableRow>
       )
     )
+
+    const usersGames = (
+      this.props.games
+        .filter((game) => game.userId && game.userId === this.props.user._id)
+        .map((game, i) =>
+          <TableRow key={i}>
+            <TableRowColumn>{i + 1}</TableRowColumn>
+            <TableRowColumn>{game.name}</TableRowColumn>
+            <TableRowColumn><Link to={`/game/${game.url}`}>{game.url}</Link></TableRowColumn>
+          </TableRow>
+        )
+    )
+
     return (
       <div>
         <div className='row'>
@@ -59,13 +72,30 @@ class Profile extends Component {
             </Table>
           </div>
         </div>
+        <div className='row'>
+          <div className='card-panel'>
+            <span className='card-title'>My Games</span>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderColumn>ID</TableHeaderColumn>
+                  <TableHeaderColumn>Name</TableHeaderColumn>
+                  <TableHeaderColumn>Slug</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {usersGames}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user, users: state.users }
+  return { user: state.user, users: state.users, games: state.games }
 }
 
 const mapDispatchToProps = (dispatch) => {

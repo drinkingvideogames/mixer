@@ -55,6 +55,7 @@ export default function makeSaga (app) {
       const genre = yield app.service('genres').create(action.payload)
       yield put(actions.genreAdd(genre.name))
     } catch (e) {
+      console.error(e)
       yield put({ type: 'genre/ADD/FAILED', message: e.message })
     }
   }
@@ -66,8 +67,9 @@ export default function makeSaga (app) {
       action.payload.imageUrl = '/uploads/imgs/images/' + image.id
       action.payload.iconImageUrl = '/uploads/imgs/icons/' + iconImage.id
       const game = yield app.service('games').create(action.payload)
-      yield put(actions.gameAdd(game.name, game.url, game.imageUrl, game.iconImageUrl))
+      yield put(actions.gameAdd(game))
     } catch (e) {
+      console.error(e)
       yield put({ type: 'game/ADD/FAILED', message: e.message })
     }
   }
@@ -75,8 +77,9 @@ export default function makeSaga (app) {
   function* loginUser (action) {
     try {
       const user = yield login(app, action)
-      yield put(actions.userLogin(user.email))
+      yield put(actions.userLogin(user))
     } catch (e) {
+      console.error(e)
       yield put(actions.userLoginFail(e))
     }
   }
@@ -85,11 +88,12 @@ export default function makeSaga (app) {
     try {
       const loginAction = yield app.service('users').create(action.payload)
         .then((data) => {
-          return { payload: { email: data.email, password: action.payload.password } }
+          return { payload: { _id: data._id, email: data.email, password: action.payload.password } }
         })
       const loggedInUser = yield login(app, loginAction)
-      yield put(actions.userLogin(loggedInUser.email))
+      yield put(actions.userLogin(loggedInUser))
     } catch (e) {
+      console.error(e)
       yield put({ type: 'user/REGISTER/FAILED', message: e.message })
     }
   }
@@ -99,6 +103,7 @@ export default function makeSaga (app) {
       yield app.logout()
       yield put(actions.userLogout())
     } catch (e) {
+      console.error(e)
       yield put({ type: 'user/LOGOUT/FAILED', message: e.message })
     }
   }
@@ -110,6 +115,7 @@ export default function makeSaga (app) {
       })
       yield put(actions.usersLoad(users))
     } catch (e) {
+      console.error(e)
       yield put(actions.usersLoadFail(e))
     }
   }

@@ -7,7 +7,8 @@ const game = (state, action) => {
         name: action.name,
         url: action.url,
         imageUrl: action.imageUrl,
-        iconImageUrl: action.iconImageUrl
+        iconImageUrl: action.iconImageUrl,
+        userId: action.userId
       }
     default:
       return state

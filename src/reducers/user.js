@@ -4,6 +4,7 @@ const user = (state = {}, action) => {
   switch (action.type) {
     case constants.user.LOGIN.SUCCESS:
       return {
+        _id: action._id,
         email: action.email
       }
     case constants.user.LOGOUT.SUCCESS:
