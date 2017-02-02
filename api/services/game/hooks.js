@@ -13,25 +13,42 @@ function prepareAssetEntry (assetServiceName, tags) {
   }
 }
 
-const before = {
-  create:
-  [ commonHooks.setCurrentDateHook('createdAt'),
-    commonHooks.setCurrentDateHook('updatedAt')
-  ],
-  update: [ commonHooks.setCurrentDateHook('updatedAt') ],
-  patch: [ commonHooks.setCurrentDateHook('updatedAt') ]
+const gameHooks = {
+  before: {
+    create:
+    [ commonHooks.requireAuth(),
+      commonHooks.setCurrentDateHook('createdAt'),
+      commonHooks.setCurrentDateHook('updatedAt')
+    ],
+    update: [ commonHooks.setCurrentDateHook('updatedAt') ],
+    patch: [ commonHooks.setCurrentDateHook('updatedAt') ]
+  }
 }
 
-const imagesAfter = {
-  create: [ prepareAssetEntry('gameimages', [ 'game', 'image' ]) ]
+const imageHooks = {
+  before: {
+    create: [
+      commonHooks.requireAuth()
+    ]
+  },
+  after: {
+    create: [ prepareAssetEntry('gameimages', [ 'game', 'image' ]) ]
+  }
 }
 
-const iconsAfter = {
-  create: [ prepareAssetEntry('gameicons', [ 'game', 'icon' ]) ]
+const iconHooks = {
+  before: {
+    create: [
+      commonHooks.requireAuth()
+    ]
+  },
+  after: {
+    create: [ prepareAssetEntry('gameicons', [ 'game', 'icon' ]) ]
+  }
 }
 
 module.exports = {
-  gameHooks: { before },
-  imageHooks: { after: imagesAfter },
-  iconHooks: { after: iconsAfter }
+  gameHooks,
+  imageHooks,
+  iconHooks
 }
