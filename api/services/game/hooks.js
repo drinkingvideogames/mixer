@@ -5,7 +5,7 @@ function prepareAssetEntry (assetServiceName, tags) {
     const baseUrl = hook.app.service(assetServiceName).baseUrl
     const asset = { url: baseUrl + hook.result.id, tags }
     return new Promise((resolve, reject) => {
-      hook.app.service('assets').create(asset).then((data) => {
+      hook.app.service('assets').create(asset, hook.params).then((data) => {
         hook.data.asset = data
         return hook
       }).then(resolve).catch(reject)
