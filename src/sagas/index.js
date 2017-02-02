@@ -88,7 +88,7 @@ export default function makeSaga (app) {
     try {
       const loginAction = yield app.service('users').create(action.payload)
         .then((data) => {
-          return { payload: { _id: data._id, email: data.email, password: action.payload.password } }
+          return { payload: { email: data.email, password: action.payload.password } }
         })
       const loggedInUser = yield login(app, loginAction)
       yield put(actions.userLogin(loggedInUser))

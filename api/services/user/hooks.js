@@ -17,7 +17,21 @@ const after = {
   ],
   get: [
     hooks.remove('password')
+  ],
+  create: [
+    sendEmailVerify()
   ]
+}
+
+function sendEmailVerify () {
+  return (hook) => {
+    return new Promise((resolve, reject) => {
+      hook.app.service('users').sendVerifyEmail(hook.result._id, hook.result.email)
+        .then(() => {
+          resolve(hook)
+        }, reject)
+    })
+  }
 }
 
 module.exports = { before, after }

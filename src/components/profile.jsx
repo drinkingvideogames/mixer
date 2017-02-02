@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
+import Snackbar from 'material-ui/Snackbar'
 
 class Profile extends Component {
   componentDidMount () {
@@ -40,6 +41,15 @@ class Profile extends Component {
             <TableRowColumn><Link to={`/game/${game.url}`}>{game.url}</Link></TableRowColumn>
           </TableRow>
         )
+    )
+
+    const verifySnackbar = (
+      !this.props.user.verified ? (
+        <Snackbar
+          open
+          message='Please verify your email!'
+        />
+      ) : ''
     )
 
     return (
@@ -89,6 +99,7 @@ class Profile extends Component {
             </Table>
           </div>
         </div>
+        {verifySnackbar}
       </div>
     )
   }

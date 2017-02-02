@@ -3,7 +3,8 @@ const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  verified: { type: Boolean, default: false }
 })
 
 UserSchema.index({ 'email': -1, background: true })

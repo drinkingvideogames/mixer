@@ -27,6 +27,16 @@ const app = feathers()
 
 app.configure(configuration(path.join(__dirname, '..')))
 
+app.set('mailgun',
+  { key: process.env.MAILGUN_API_KEY,
+    domain: process.env.MAILGUN_DOMAIN,
+    from: process.env.MAILGUN_FROM
+  })
+
+if (process.env.SITE_URL) {
+  app.set('siteUrl', process.env.SITE_URL)
+}
+
 let port = process.env.PORT || 4242
 let env = process.env.NODE_ENV || 'development'
 
@@ -51,6 +61,20 @@ app.use(compression())
   .configure(jwt())
   .configure(services)
   .configure(middleware)
+
+app.get('/verify/:userId', (req, res) => {
+  if (req.params.userId) {
+    app.service('users').verify(req.params.userId)
+      .then(() => {
+        return res.redirect('/')
+      })
+      .catch((e) => {
+        console.error('Error verifying', e)
+      })
+  } else {
+    console.error('No userId to verify')
+  }
+})
 
 app.get('*', (req, res) => {
   return res.sendFile(path.join(app.get('public'), 'index.html'))

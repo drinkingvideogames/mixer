@@ -23,7 +23,8 @@ const drinkingGameAdd = (game, name, url) => ({
 const userLogin = (user) => ({
   type: constants.user.LOGIN.SUCCESS,
   _id: user._id,
-  email: user.email
+  email: user.email,
+  verified: user.verified
 })
 
 const userLoginFail = (e) => ({

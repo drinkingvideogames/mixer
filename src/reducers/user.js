@@ -5,7 +5,8 @@ const user = (state = {}, action) => {
     case constants.user.LOGIN.SUCCESS:
       return {
         _id: action._id,
-        email: action.email
+        email: action.email,
+        verified: action.verified
       }
     case constants.user.LOGOUT.SUCCESS:
       return {}
