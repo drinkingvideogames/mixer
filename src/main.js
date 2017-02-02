@@ -36,7 +36,8 @@ const store = createStore(createReducer(),
     drinkingGames: [
       { name: 'Drinking Game 1', url: 'drinkme' },
       { name: 'Drinking Game 2', url: 'drinkmemore' }
-    ]
+    ],
+    users: []
   },
   applyMiddleware(sagaMiddleware))
 

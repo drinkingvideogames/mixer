@@ -27,6 +27,12 @@ const actionTypes = {
       SUCCESS: 'user/LOGOUT/SUCCESS',
       FAILED: 'user/LOGOUT/FAILED'
     }
+  },
+  users: {
+    LOAD: {
+      SUCCESS: 'users/LOAD/SUCCESS',
+      FAILED: 'users/LOAD/FAILED'
+    }
   }
 }
 

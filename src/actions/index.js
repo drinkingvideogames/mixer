@@ -24,8 +24,23 @@ const userLogin = (email) => ({
   email
 })
 
+const userLoginFail = (e) => ({
+  type: constants.user.LOGIN.FAILED,
+  message: e.message
+})
+
 const userLogout = () => ({
   type: constants.user.LOGOUT.SUCCESS
+})
+
+const usersLoad = (users) => ({
+  type: constants.users.LOAD.SUCCESS,
+  users
+})
+
+const usersLoadFail = (e) => ({
+  type: constants.users.LOAD.FAILED,
+  message: e.message
 })
 
 export default {
@@ -33,5 +48,8 @@ export default {
   gameAdd,
   drinkingGameAdd,
   userLogin,
-  userLogout
+  userLoginFail,
+  userLogout,
+  usersLoad,
+  usersLoadFail
 }

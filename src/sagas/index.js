@@ -77,7 +77,7 @@ export default function makeSaga (app) {
       const user = yield login(app, action)
       yield put(actions.userLogin(user.email))
     } catch (e) {
-      yield put({ type: 'user/LOGIN/FAILED', message: e.message })
+      yield put(actions.userLoginFail(e))
     }
   }
 
@@ -103,13 +103,25 @@ export default function makeSaga (app) {
     }
   }
 
+  function* loadUsers (action) {
+    try {
+      const users = yield app.service('users').find().then((users) => {
+        return users.data.map((user) => ({ email: user.email }))
+      })
+      yield put(actions.usersLoad(users))
+    } catch (e) {
+      yield put(actions.usersLoadFail(e))
+    }
+  }
+
   function* mySaga () {
     yield [
       takeEvery('GENRE_ADD', addGenre),
       takeEvery('GAME_ADD', addGame),
       takeEvery('USER_LOGIN', loginUser),
       takeEvery('USER_REGISTER', registerUser),
-      takeEvery('USER_LOGOUT', logoutUser)
+      takeEvery('USER_LOGOUT', logoutUser),
+      takeEvery('USERS_LOAD', loadUsers)
     ]
   }
 
