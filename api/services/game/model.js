@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const GameSchema = new Schema({
   name: { type: String, required: true },
+  userId: { type: Schema.Types.ObjectId, required: true },
   url: { type: String, required: true },
   imageUrl: { type: String },
   iconImageUrl: { type: String },

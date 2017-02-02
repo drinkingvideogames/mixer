@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const GenreSchema = new Schema({
   name: { type: String, required: true },
+  userId: { type: Schema.Types.ObjectId, required: true },
   createdAt: { type: Date, default: new Date() },
   updatedAt: { type: Date, default: new Date() }
 })

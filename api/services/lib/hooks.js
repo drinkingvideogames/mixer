@@ -16,8 +16,17 @@ function requireAuth () {
   }
 }
 
+function embellishUser (fieldName) {
+  fieldName = fieldName || 'userId'
+  return (hook) => {
+    hook.data[fieldName] = hook.params.user._id
+    return Promise.resolve(hook)
+  }
+}
+
 module.exports = {
   setFieldHook,
   setCurrentDateHook,
-  requireAuth
+  requireAuth,
+  embellishUser
 }
