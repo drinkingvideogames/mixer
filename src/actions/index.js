@@ -27,11 +27,6 @@ const userLogin = (user) => ({
   verified: user.verified
 })
 
-const userLoginFail = (e) => ({
-  type: constants.user.LOGIN.FAILED,
-  message: e.message
-})
-
 const userLogout = () => ({
   type: constants.user.LOGOUT.SUCCESS
 })
@@ -41,18 +36,22 @@ const usersLoad = (users) => ({
   users
 })
 
-const usersLoadFail = (e) => ({
-  type: constants.users.LOAD.FAILED,
-  message: e.message
-})
+const errors = {
+  genreAdd: (e) => ({ type: constants.genre.ADD.FAILED, error: e }),
+  gameAdd: (e) => ({ type: constants.game.ADD.FAILED, error: e }),
+  userLogin: (e) => ({ type: constants.user.LOGIN.FAILED, error: e }),
+  userRegister: (e) => ({ type: constants.user.REGISTER.FAILED, error: e }),
+  userLogout: (e) => ({ type: constants.user.LOGOUT.FAILED, error: e }),
+  usersLoad: (e) => ({ type: constants.users.LOAD.FAILED, error: e }),
+  clear: (errorName) => ({ type: constants.errors.CLEAR, errorName })
+}
 
 export default {
   genreAdd,
   gameAdd,
   drinkingGameAdd,
   userLogin,
-  userLoginFail,
   userLogout,
   usersLoad,
-  usersLoadFail
+  errors
 }

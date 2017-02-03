@@ -56,7 +56,7 @@ export default function makeSaga (app) {
       yield put(actions.genreAdd(genre.name))
     } catch (e) {
       console.error(e)
-      yield put({ type: 'genre/ADD/FAILED', message: e.message })
+      yield put(actions.errors.genreAdd(e))
     }
   }
 
@@ -70,7 +70,7 @@ export default function makeSaga (app) {
       yield put(actions.gameAdd(game))
     } catch (e) {
       console.error(e)
-      yield put({ type: 'game/ADD/FAILED', message: e.message })
+      yield put(actions.errors.gameAdd(e))
     }
   }
 
@@ -80,7 +80,7 @@ export default function makeSaga (app) {
       yield put(actions.userLogin(user))
     } catch (e) {
       console.error(e)
-      yield put(actions.userLoginFail(e))
+      yield put(actions.errors.userLogin(e))
     }
   }
 
@@ -94,7 +94,7 @@ export default function makeSaga (app) {
       yield put(actions.userLogin(loggedInUser))
     } catch (e) {
       console.error(e)
-      yield put({ type: 'user/REGISTER/FAILED', message: e.message })
+      yield put(actions.errors.userRegister(e))
     }
   }
 
@@ -104,7 +104,7 @@ export default function makeSaga (app) {
       yield put(actions.userLogout())
     } catch (e) {
       console.error(e)
-      yield put({ type: 'user/LOGOUT/FAILED', message: e.message })
+      yield put(actions.errors.userLogout(e))
     }
   }
 
@@ -116,8 +116,12 @@ export default function makeSaga (app) {
       yield put(actions.usersLoad(users))
     } catch (e) {
       console.error(e)
-      yield put(actions.usersLoadFail(e))
+      yield put(actions.errors.usersLoad(e))
     }
+  }
+
+  function* clearError (action) {
+    yield put(actions.errors.clear(action.payload.errorName))
   }
 
   function* mySaga () {
@@ -127,7 +131,8 @@ export default function makeSaga (app) {
       takeEvery('USER_LOGIN', loginUser),
       takeEvery('USER_REGISTER', registerUser),
       takeEvery('USER_LOGOUT', logoutUser),
-      takeEvery('USERS_LOAD', loadUsers)
+      takeEvery('USERS_LOAD', loadUsers),
+      takeEvery('ERROR_CLEAR', clearError)
     ]
   }
 

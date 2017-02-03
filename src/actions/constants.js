@@ -33,6 +33,9 @@ const actionTypes = {
       SUCCESS: 'users/LOAD/SUCCESS',
       FAILED: 'users/LOAD/FAILED'
     }
+  },
+  errors: {
+    CLEAR: 'errors/CLEAR'
   }
 }
 
