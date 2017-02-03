@@ -16,7 +16,9 @@ const errors = (state = {}, action) => {
       return Object.assign({}, state, { usersLoad: action.error })
     case constants.errors.CLEAR:
       const newState = Object.assign({}, state)
-      delete newState[action.errorName]
+      if (newState.hasOwnProperty(action.errorName)) {
+        delete newState[action.errorName]
+      }
       return newState
     default:
       return state
