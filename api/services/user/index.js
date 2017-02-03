@@ -33,9 +33,9 @@ module.exports = function () {
         to: email,
         subject: 'Hello from Manapot!',
         html: `
-          <a href="http://${siteUrl}/verify/${id}">
-            Click here to verify your account!
-          </a>`
+          Hey there! To fully unlock your account click
+          <a href="http://${siteUrl}/verify/${id}">here</a>
+          to verify your email!`
       }
       mailgun.messages().send(data, (err, body) => {
         if (err) return reject(err)
