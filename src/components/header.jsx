@@ -9,6 +9,7 @@ class Header extends Component {
 
   componentDidUpdate () {
     if (this.props.user.email) swal.close()
+    if (this.props.errors.userLogin) this.openErrorModal()
     this.updateAutoComplete()
   }
 
@@ -40,8 +41,20 @@ class Header extends Component {
     )
   }
 
+  openErrorModal () {
+    const settings = {
+      title: 'There was an error!',
+      type: 'error',
+      showLoaderOnConfirm: false,
+      closeOnConfirm: true
+    }
+    swal(this.getModalSettings(settings), () => {
+      this.props.clearError('userLogin')
+    })
+  }
+
   openLoginModal () {
-    let settings = {
+    const settings = {
       confirmButtonText: 'Login',
       text: [
         '<input class="js-sw-login-email" type="email" placeholder="Email" tabindex="1"/>',
@@ -56,7 +69,7 @@ class Header extends Component {
   }
 
   openRegisterModal () {
-    let settings = {
+    const settings = {
       confirmButtonText: 'Register',
       text: [
         '<input class="js-sw-register-email" type="email" placeholder="Email" tabindex="1"/>',
@@ -135,13 +148,14 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { genres: state.genres, games: state.games, user: state.user }
+  return { genres: state.genres, games: state.games, user: state.user, errors: state.errors }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     userRegister: (email, password) => { dispatch({ type: 'USER_REGISTER', payload: { email, password } }) },
-    userLogin: (email, password) => { dispatch({ type: 'USER_LOGIN', payload: { email, password } }) }
+    userLogin: (email, password) => { dispatch({ type: 'USER_LOGIN', payload: { email, password } }) },
+    clearError: (errorName) => { dispatch({ type: 'ERROR_CLEAR', payload: { errorName } }) }
   }
 }
 
