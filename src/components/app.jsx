@@ -6,7 +6,7 @@ import MainTemplate from './templates/main.jsx'
 import Main from './main.jsx'
 import Game from './game.jsx'
 import DrinkingGame from './drinking-game.jsx'
-import Profile from './profile.jsx'
+import Profile from './user/profile.jsx'
 
 class App extends Component {
   render () {
