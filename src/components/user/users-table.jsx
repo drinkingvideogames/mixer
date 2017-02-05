@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
+import CheckCircleIcon from 'material-ui/svg-icons/action/check-circle'
 
 class UsersTable extends Component {
   componentDidMount () {
+    this.props.usersLoad()
+  }
+
+  componentDidUpdate () {
     this.props.usersLoad()
   }
 
@@ -13,6 +18,9 @@ class UsersTable extends Component {
         <TableRow key={i}>
           <TableRowColumn>{i + 1}</TableRowColumn>
           <TableRowColumn>{user.email}</TableRowColumn>
+          <TableRowColumn>
+            {user.verified ? (<CheckCircleIcon />) : ''}
+          </TableRowColumn>
         </TableRow>
       )
     )
@@ -25,6 +33,7 @@ class UsersTable extends Component {
             <TableRow>
               <TableHeaderColumn>ID</TableHeaderColumn>
               <TableHeaderColumn>Email</TableHeaderColumn>
+              <TableHeaderColumn>Verified</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody>

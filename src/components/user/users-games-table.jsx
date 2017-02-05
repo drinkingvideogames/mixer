@@ -4,10 +4,6 @@ import { connect } from 'react-redux'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 
 class UsersGamesTables extends Component {
-  componentDidMount () {
-    this.props.usersLoad()
-  }
-
   render () {
     const usersGames = (
       this.props.games

@@ -111,7 +111,9 @@ export default function makeSaga (app) {
   function* loadUsers (action) {
     try {
       const users = yield app.service('users').find().then((users) => {
-        return users.data.map((user) => ({ email: user.email }))
+        return users.data.map((user) => (
+          { email: user.email, verified: user.verified }
+        ))
       })
       yield put(actions.usersLoad(users))
     } catch (e) {
