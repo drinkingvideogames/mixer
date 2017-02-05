@@ -10,6 +10,8 @@ module.exports = {
       }
     }),
     new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
