@@ -11,6 +11,7 @@ module.exports = {
     main: [
       'webpack-dev-server/client?http://localhost:4241',
       'webpack/hot/only-dev-server',
+      path.join(__dirname, 'public', 'js', 'sweetalert-custom.js'),
       path.join(__dirname, 'src', 'main.js')
     ]
   },

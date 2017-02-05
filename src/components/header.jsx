@@ -9,8 +9,15 @@ class Header extends Component {
 
   componentDidUpdate () {
     if (this.props.user.email) swal.close()
-    if (this.props.errors.userLogin) this.openErrorModal()
+    if (this.getUserLoginError()) {
+      this.openErrorModal()
+    }
     this.updateAutoComplete()
+  }
+
+  getUserLoginError () {
+    return this.props.errors.userLogin &&
+      this.props.errors.userLogin.message !== 'jwt expired'
   }
 
   updateAutoComplete () {
@@ -29,13 +36,8 @@ class Header extends Component {
     return Object.assign(
       {},
       { title: '',
-        html: true,
-        customClass: 'show-input',
         showLoaderOnConfirm: true,
-        closeOnConfirm: false,
-        allowOutsideClick: true,
-        confirmButtonTabIndex: 3,
-        cancelButtonTabIndex: 4
+        allowOutsideClick: true
       },
       extras
     )
@@ -45,10 +47,9 @@ class Header extends Component {
     const settings = {
       title: 'There was an error!',
       type: 'error',
-      showLoaderOnConfirm: false,
-      closeOnConfirm: true
+      showLoaderOnConfirm: false
     }
-    swal(this.getModalSettings(settings), () => {
+    swal(this.getModalSettings(settings)).then(() => {
       this.props.clearError('userLogin')
     })
   }
@@ -56,12 +57,12 @@ class Header extends Component {
   openLoginModal () {
     const settings = {
       confirmButtonText: 'Login',
-      text: [
+      html: [
         '<input class="js-sw-login-email" type="email" placeholder="Email" tabindex="1"/>',
         '<input class="js-sw-login-password" type="password" placeholder="Password" tabindex="2"/>'
       ].join('')
     }
-    swal(this.getModalSettings(settings), () => {
+    swal(this.getModalSettings(settings)).then(() => {
       let email = $('.js-sw-login-email').val().trim()
       let password = $('.js-sw-login-password').val().trim()
       this.props.userLogin(email, password)
@@ -71,12 +72,12 @@ class Header extends Component {
   openRegisterModal () {
     const settings = {
       confirmButtonText: 'Register',
-      text: [
+      html: [
         '<input class="js-sw-register-email" type="email" placeholder="Email" tabindex="1"/>',
         '<input class="js-sw-register-password" type="password" placeholder="Password" tabindex="2"/>'
       ].join('')
     }
-    swal(this.getModalSettings(settings), () => {
+    swal(this.getModalSettings(settings)).then(() => {
       let email = $('.js-sw-register-email').val().trim()
       let password = $('.js-sw-register-password').val().trim()
       this.props.userRegister(email, password)
