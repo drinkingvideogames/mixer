@@ -11,3 +11,38 @@
   vertical-align: middle;
   width: 100%;
 }
+
+*[contenteditable=true] {
+  border: 1px #ffffff dashed;
+  padding: 0px 10px !important;
+}
+
+*[contenteditable=true]:after {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  content: '\e254';
+  position: relative;
+  width: 0px;
+  height: 0px;
+  top: -1.15em;
+  right: 0.25em;
+  overflow: visible;
+}
+
+*[contenteditable=true]:focus {
+  border-style: dotted;
+  outline: none;
+}
+
+*[contenteditable=true]:focus:after {
+  content: '';
+}
