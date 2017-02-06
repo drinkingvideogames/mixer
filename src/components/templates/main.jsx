@@ -11,14 +11,14 @@ class MainTemplate extends Component {
         <div className='container'>
           {this.props.children}
         </div>
-        { this.props.user.email && this.props.user.verified ? <AdminToolbar /> : '' }
+        { this.props.user && this.props.user.has('email') && this.props.user.get('verified') ? <AdminToolbar /> : '' }
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user }
+  return { user: state.get('user') }
 }
 
 export default connect(mapStateToProps)(MainTemplate)

@@ -85,7 +85,7 @@ class NewGameModal extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { genres: state.genres }
+  return { genres: state.get('genres') }
 }
 
 const mapDispatchToProps = (dispatch) => {

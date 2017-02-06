@@ -38,7 +38,7 @@ class UsersGamesTables extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user, games: state.games }
+  return { user: state.get('user'), games: state.get('games') }
 }
 
 export default connect(mapStateToProps)(UsersGamesTables)

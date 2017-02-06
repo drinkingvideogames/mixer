@@ -1,21 +1,21 @@
+import { List, Map } from 'immutable'
 import constants from '../actions/constants'
+
+const init = List([])
 
 const genre = (state, action) => {
   switch (action.type) {
     case constants.genre.ADD.SUCCESS:
-      return Object.assign({}, { name: action.name })
+      return Map({ name: action.name })
     default:
       return state
   }
 }
 
-const genres = (state = [], action) => {
+const genres = (state = init, action) => {
   switch (action.type) {
     case constants.genre.ADD.SUCCESS:
-      return [
-        ...state,
-        genre(undefined, action)
-      ]
+      return state.push(genre(undefined, action))
     default:
       return state
   }

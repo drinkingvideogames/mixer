@@ -8,7 +8,7 @@ class Header extends Component {
   }
 
   componentDidUpdate () {
-    if (this.props.user.email) swal.close()
+    if (this.props.user.has('email')) swal.close()
     if (this.getUserLoginError()) {
       this.openErrorModal()
     }
@@ -16,13 +16,13 @@ class Header extends Component {
   }
 
   getUserLoginError () {
-    return this.props.errors.userLogin &&
-      this.props.errors.userLogin.message !== 'jwt expired'
+    return this.props.errors.has('userLogin') &&
+      this.props.errors.getIn('userLogin', 'message') !== 'jwt expired'
   }
 
   updateAutoComplete () {
     $(document).ready(() => {
-      const data = this.props.games.reduce((data, game) => {
+      const data = this.props.games.toArray().reduce((data, game) => {
         data[game.name] = game.iconImageUrl
         return data
       }, {})
@@ -102,13 +102,13 @@ class Header extends Component {
       }
     }
 
-    if (this.props.user.email) {
+    if (this.props.user.has('email')) {
       styles.autoCompleteInput.width = '80%'
       styles.rightBlock.width = '15%'
       styles.genreButton.width = '70%'
     }
 
-    const genres = this.props.genres.length > 0 ? this.props.genres.map((genre, index) => {
+    const genres = this.props.genres.size > 0 ? this.props.genres.toArray().map((genre, index) => {
       return (<li key={index}><a href='#!'>{genre.name}</a></li>)
     }) : (<li><a href='#!'>No genres to list!</a></li>)
 
@@ -134,9 +134,9 @@ class Header extends Component {
             </div>
             <ul className='right' style={styles.rightBlock}>
               <li style={styles.genreButton}><a className='dropdown-button' href='#' data-activates='genresDropdown'>Genres</a></li>
-              {this.props.user.email ? <li><Link to='/profile'><i className='material-icons'>account_circle</i></Link></li> : ''}
-              {this.props.user.email ? '' : <li onClick={this.openRegisterModal.bind(this)}><a>Register</a></li>}
-              {this.props.user.email ? '' : <li onClick={this.openLoginModal.bind(this)}><a>Login</a></li>}
+              {this.props.user.has('email') ? <li><Link to='/profile'><i className='material-icons'>account_circle</i></Link></li> : ''}
+              {this.props.user.has('email') ? '' : <li onClick={this.openRegisterModal.bind(this)}><a>Register</a></li>}
+              {this.props.user.has('email') ? '' : <li onClick={this.openLoginModal.bind(this)}><a>Login</a></li>}
             </ul>
             <ul id='genresDropdown' className='dropdown-content'>
               {genres}
@@ -149,7 +149,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { genres: state.genres, games: state.games, user: state.user, errors: state.errors }
+  return { genres: state.get('genres'), games: state.get('games'), user: state.get('user'), errors: state.get('errors') }
 }
 
 const mapDispatchToProps = (dispatch) => {

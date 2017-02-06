@@ -1,25 +1,27 @@
+import { Map } from 'immutable'
 import constants from '../actions/constants'
 
-const errors = (state = {}, action) => {
+const init = Map({})
+
+const errors = (state = init, action) => {
   switch (action.type) {
     case constants.genre.ADD.FAILED:
-      return Object.assign({}, state, { genreAdd: action.error })
+      return state.set('genreAdd', action.error)
     case constants.game.ADD.FAILED:
-      return Object.assign({}, state, { gameAdd: action.error })
+      return state.set('gameAdd', action.error)
     case constants.user.LOGIN.FAILED:
-      return Object.assign({}, state, { userLogin: action.error })
+      return state.set('userLogin', action.error)
     case constants.user.REGISTER.FAILED:
-      return Object.assign({}, state, { userRegister: action.error })
+      return state.set('userRegister', action.error)
     case constants.user.LOGOUT.FAILED:
-      return Object.assign({}, state, { userLogout: action.error })
+      return state.set('userLogout', action.error)
     case constants.users.LOAD.FAILED:
-      return Object.assign({}, state, { usersLoad: action.error })
+      return state.set('usersLoad', action.error)
     case constants.errors.CLEAR:
-      const newState = Object.assign({}, state)
-      if (newState.hasOwnProperty(action.errorName)) {
-        delete newState[action.errorName]
+      if (state.has(action.errorName)) {
+        return state.delete(action.errorName)
       }
-      return newState
+      return state
     default:
       return state
   }

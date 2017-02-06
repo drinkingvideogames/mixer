@@ -39,7 +39,7 @@ class Game extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { games: state.games, drinkingGames: state.drinkingGames }
+  return { games: state.get('games'), drinkingGames: state.get('drinkingGames'), user: state.get('user') }
 }
 
 export default connect(mapStateToProps)(Game)

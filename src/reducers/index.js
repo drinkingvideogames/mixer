@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux-immutable'
 import genres from './genres'
 import games from './games'
 import drinkingGames from './drinking-games'
@@ -7,7 +7,14 @@ import users from './users'
 import errors from './errors'
 
 function createRootReducer () {
-  return combineReducers({ genres, games, drinkingGames, user, users, errors })
+  return combineReducers({
+    genres,
+    games,
+    drinkingGames,
+    user,
+    users,
+    errors
+  })
 }
 
 export default createRootReducer
