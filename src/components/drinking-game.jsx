@@ -12,8 +12,8 @@ class DrinkingGame extends Component {
         <div>
           <nav>
             <div className='nav-wrapper blue'>
-              <Link to={`/game/${game.url}`}>
-                <a href='#' className='brand-logo center'>{game.name}</a>
+              <Link className='brand-logo center' to={`/game/${game.url}`}>
+                {game.name}
               </Link>
             </div>
           </nav>

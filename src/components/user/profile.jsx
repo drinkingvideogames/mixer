@@ -31,6 +31,24 @@ class Profile extends Component {
       ) : ''
     )
 
+    const usersTable = this.props.user.get('roles').includes('superadmin') ? (
+      <div className='row'>
+        <UsersTable />
+      </div>
+    ) : ''
+
+    const usersGamesTable = this.props.user.get('roles').includes('admin') ? (
+      <div className='row'>
+        <UsersGamesTable />
+      </div>
+    ) : ''
+
+    const allGamesTable = this.props.user.get('roles').includes('superadmin') ? (
+      <div className='row'>
+        <UsersGamesTable all />
+      </div>
+    ) : ''
+
     return (
       <div>
         <div className='row'>
@@ -45,12 +63,9 @@ class Profile extends Component {
             </Toolbar>
           </div>
         </div>
-        <div className='row'>
-          <UsersTable />
-        </div>
-        <div className='row'>
-          <UsersGamesTable />
-        </div>
+        {usersGamesTable}
+        {usersTable}
+        {allGamesTable}
         {verifySnackbar}
       </div>
     )
