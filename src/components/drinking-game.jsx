@@ -4,16 +4,16 @@ import { connect } from 'react-redux'
 
 class DrinkingGame extends Component {
   render () {
-    const game = this.props.games.find((game) => game.url === this.props.routeParams.game)
-    const drinkingGame = this.props.drinkingGames.find((game) => game.url === this.props.routeParams.drinkingGame)
+    const game = this.props.games.toJS().find((game) => game.url === this.props.routeParams.game)
+    const drinkingGame = this.props.drinkingGames.toJS().find((game) => game.url === this.props.routeParams.drinkingGame)
 
-    if (game) {
+    if (game && drinkingGame) {
       return (
         <div>
           <nav>
             <div className='nav-wrapper blue'>
-              <Link to={`/game/${game.url}`}>
-                <a href='#' className='brand-logo center'>{game.name}</a>
+              <Link className='brand-logo center' to={`/game/${game.url}`}>
+                {game.name}
               </Link>
             </div>
           </nav>
@@ -36,7 +36,7 @@ class DrinkingGame extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { games: state.games, drinkingGames: state.drinkingGames }
+  return { games: state.get('games'), drinkingGames: state.get('drinkingGames') }
 }
 
 export default connect(mapStateToProps)(DrinkingGame)

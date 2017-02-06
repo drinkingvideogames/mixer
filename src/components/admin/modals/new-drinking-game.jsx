@@ -6,8 +6,8 @@ class NewDrinkingGameModal extends Component {
   render () {
     let input = {}
 
-    const games = this.props.games.length > 0 ? this.props.games.map((game, index) => {
-      return (<li key={index}><a href='#!'>{game.name}</a></li>)
+    const games = this.props.games.size > 0 ? this.props.games.toArray().map((game, index) => {
+      return (<li key={index}><a href='#!'>{game.get('name')}</a></li>)
     }) : (<li><a href='#!'>No games to list!</a></li>)
 
     return (
@@ -57,7 +57,7 @@ class NewDrinkingGameModal extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { games: state.games }
+  return { games: state.get('games') }
 }
 
 const mapDispatchToProps = (dispatch) => {

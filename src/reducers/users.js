@@ -1,9 +1,12 @@
+import { List } from 'immutable'
 import constants from '../actions/constants'
 
-const users = (state = [], action) => {
+const init = List([])
+
+const users = (state = init, action) => {
   switch (action.type) {
     case constants.users.LOAD.SUCCESS:
-      return action.users.concat([])
+      return List(action.users)
     default:
       return state
   }

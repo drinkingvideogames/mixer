@@ -2,5 +2,9 @@
   "host": "localhost",
   "port": 4242,
   "public": "../public/",
-  "auth": {}
+  "auth": {},
+  "superAdminEmails": [
+    "matt.a.elphy@gmail.com",
+    "mae.me.uk@gmail.com"
+  ]
 }

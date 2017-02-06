@@ -1,15 +1,19 @@
+import { Map } from 'immutable'
 import constants from '../actions/constants'
 
-const user = (state = {}, action) => {
+const init = Map({})
+
+const user = (state = init, action) => {
   switch (action.type) {
     case constants.user.LOGIN.SUCCESS:
-      return {
+      return Map({
         _id: action._id,
         email: action.email,
-        verified: action.verified
-      }
+        verified: action.verified,
+        roles: action.roles
+      })
     case constants.user.LOGOUT.SUCCESS:
-      return {}
+      return Map({})
     default:
       return state
   }

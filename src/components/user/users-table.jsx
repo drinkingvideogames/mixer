@@ -14,7 +14,7 @@ class UsersTable extends Component {
 
   render () {
     const users = (
-      this.props.users.map((user, i) =>
+      this.props.users.toArray().map((user, i) =>
         <TableRow key={i}>
           <TableRowColumn>{i + 1}</TableRowColumn>
           <TableRowColumn>{user.email}</TableRowColumn>
@@ -46,7 +46,7 @@ class UsersTable extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { users: state.users }
+  return { users: state.get('users') }
 }
 
 const mapDispatchToProps = (dispatch) => {

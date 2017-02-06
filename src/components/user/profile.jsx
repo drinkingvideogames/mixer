@@ -9,11 +9,11 @@ import UsersGamesTable from './users-games-table.jsx'
 
 class Profile extends Component {
   componentDidMount () {
-    if (!this.props.user.email) return this.props.router.push('/')
+    if (!this.props.user || !this.props.user.has('email')) return this.props.router.push('/')
   }
 
   componentDidUpdate () {
-    if (!this.props.user.email) return this.props.router.push('/')
+    if (!this.props.user || !this.props.user.has('email')) return this.props.router.push('/')
   }
 
   logout () {
@@ -23,7 +23,7 @@ class Profile extends Component {
 
   render () {
     const verifySnackbar = (
-      !this.props.user.verified ? (
+      !this.props.user.get('verified') ? (
         <Snackbar
           open
           message='Please verify your email!'
@@ -31,13 +31,31 @@ class Profile extends Component {
       ) : ''
     )
 
+    const usersTable = this.props.user.get('roles').includes('superadmin') ? (
+      <div className='row'>
+        <UsersTable />
+      </div>
+    ) : ''
+
+    const usersGamesTable = this.props.user.get('roles').includes('admin') ? (
+      <div className='row'>
+        <UsersGamesTable />
+      </div>
+    ) : ''
+
+    const allGamesTable = this.props.user.get('roles').includes('superadmin') ? (
+      <div className='row'>
+        <UsersGamesTable all />
+      </div>
+    ) : ''
+
     return (
       <div>
         <div className='row'>
           <div className='card-panel'>
             <Toolbar>
               <ToolbarGroup>
-                <ToolbarTitle text={`Account: ${this.props.user.email}`} />
+                <ToolbarTitle text={`Account: ${this.props.user.get('email')}`} />
               </ToolbarGroup>
               <ToolbarGroup>
                 <RaisedButton label='Logout' primary onClick={this.logout.bind(this)} />
@@ -45,12 +63,9 @@ class Profile extends Component {
             </Toolbar>
           </div>
         </div>
-        <div className='row'>
-          <UsersTable />
-        </div>
-        <div className='row'>
-          <UsersGamesTable />
-        </div>
+        {usersGamesTable}
+        {usersTable}
+        {allGamesTable}
         {verifySnackbar}
       </div>
     )
@@ -58,7 +73,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user }
+  return { user: state.get('user') }
 }
 
 const mapDispatchToProps = (dispatch) => {

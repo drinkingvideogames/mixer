@@ -3,12 +3,28 @@ const actionTypes = {
     ADD: {
       SUCCESS: 'genre/ADD/SUCCESS',
       FAILED: 'genre/ADD/FAILED'
+    },
+    UPDATE: {
+      SUCCESS: 'genre/UPDATE/SUCCESS',
+      FAILED: 'genre/UPDATE/FAILED'
+    },
+    DELETE: {
+      SUCCESS: 'genre/DELETE/SUCCESS',
+      FAILED: 'genre/DELETE/FAILED'
     }
   },
   game: {
     ADD: {
       SUCCESS: 'game/ADD/SUCCESS',
       FAILED: 'game/ADD/FAILED'
+    },
+    UPDATE: {
+      SUCCESS: 'game/UPDATE/SUCCESS',
+      FAILED: 'game/UPDATE/FAILED'
+    },
+    DELETE: {
+      SUCCESS: 'game/DELETE/SUCCESS',
+      FAILED: 'game/DELETE/FAILED'
     }
   },
   drinkingGame: {
@@ -26,6 +42,10 @@ const actionTypes = {
     LOGOUT: {
       SUCCESS: 'user/LOGOUT/SUCCESS',
       FAILED: 'user/LOGOUT/FAILED'
+    },
+    DELETE: {
+      SUCCESS: 'user/DELETE/SUCCESS',
+      FAILED: 'user/DELETE/FAILED'
     }
   },
   users: {

@@ -16,7 +16,9 @@ class App extends Component {
           <Route path='/' component={Main} />
         </Route>
         <Route component={MainTemplate}>
+          <Route path='/game/new' component={Game} new />
           <Route path='/game/:game' component={Game} />
+          <Route path='/game/:game/edit' component={Game} edit />
           <Route path='/game/:game/drink/:drinkingGame' component={DrinkingGame} />
           <Route path='/profile' component={Profile} />
         </Route>
