@@ -20,13 +20,9 @@ export default function makeGameSagas (app) {
   function* update (action) {
     try {
       const game = yield app.service('games')
-        .update(
-          { _id: action.payload._id },
-          { $set: {
-              name: action.payload.name,
-              url: action.payload.url
-            }
-          })
+        .update({ _id: action.payload._id },
+        { $set: { name: action.payload.name, url: action.payload.url }
+        })
       yield put(userActions.update(game))
     } catch (e) {
       console.error(e)
