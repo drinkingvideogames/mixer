@@ -35,14 +35,14 @@ sagaMiddleware.run(saga(app))
 const genreService = app.service('genres')
 genreService.find().then((genres) => {
   genres.data.forEach((genre) => {
-    store.dispatch(actions.genreAdd(genre.name))
+    store.dispatch(genreActions.add(genre.name))
   })
 })
 
 const gameService = app.service('games')
 gameService.find().then((games) => {
   games.data.forEach((game) => {
-    store.dispatch(actions.gameAdd(game))
+    store.dispatch(gameActions.add(game))
   })
 })
 
