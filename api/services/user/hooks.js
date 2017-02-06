@@ -7,7 +7,8 @@ const before = {
     auth.authenticate('jwt')
   ],
   create: [
-    local.hashPassword({ passwordField: 'password' })
+    local.hashPassword({ passwordField: 'password' }),
+    superAdminCreate()
   ]
 }
 
@@ -21,6 +22,16 @@ const after = {
   create: [
     sendEmailVerify()
   ]
+}
+
+/*! TODO: Replace this with something better */
+function superAdminCreate () {
+  return (hook) => {
+    if (hook.app.get('superAdminEmails').includes(hook.data.email)) {
+      hook.data.roles = [ 'superadmin', 'admin', 'user' ]
+    }
+    return Promise.resolve(hook)
+  }
 }
 
 function sendEmailVerify () {
