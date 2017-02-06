@@ -46,6 +46,7 @@
     "material-ui": "^0.16.7",
     "mkdirp": "^0.5.1",
     "mongoose": "^4.6.6",
+    "mongoose-history": "^0.4.2",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "react": "^15.4.2",
